@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Anos - Maria Eduarda</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --rose-gold: #B76E79;
+            --rose-gold-light: #F8E1E7;
+            --fuchsia: #D9027D;
+            --fuchsia-dark: #8A004F;
+            --gold-light: #F9F1CC;
+            --gold-mid: #D4AF37;
+            --gold-dark: #AA771C;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--rose-gold-light);
+            overflow: hidden; /* Prevents scroll during intro */
+            margin: 0;
+            padding: 0;
+            touch-action: manipulation;
+            /* Custom cursor - Estrela mágica */
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%23D9027D' opacity='0.8'><path d='M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z'/></svg>") 16 16, auto;
+        }
+
+        /* Gold Gradient Text */
+        .text-gold {
+            background: linear-gradient(to right, var(--gold-dark), var(--gold-mid), var(--gold-light), var(--gold-mid), var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        /* Gold Gradient Border/Background */
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-mid) 25%, var(--gold-light) 50%, var(--gold-mid) 75%, var(--gold-dark) 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 5s ease infinite;
+        }
+
+        /* Typography */
+        .font-script {
+            font-family: 'Great Vibes', cursive;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animations */
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #envelope-scene {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--rose-gold-light) 0%, #fff 100%);
+            z-index: 50;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            perspective: 1000px;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .envelope-wrapper {
+            position: relative;
+            width: 320px; height: 200px;
+            transition: transform 1s ease;
+        }
+        
+        .envelope-back {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--fuchsia-dark);
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(138, 0, 79, 0.3);
+        }
+        
+        .envelope-front {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-left: 160px solid rgba(217, 2, 125, 0.95); /* Fúcsia */
+            border-right: 160px solid rgba(217, 2, 125, 0.95);
+            border-bottom: 100px solid var(--fuchsia-dark);
+            border-top: 100px solid transparent;
+            border-radius: 8px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        
+        .envelope-flap {
+            position: absolute; top: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid var(--fuchsia);
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 4;
+        }
+        
+        .envelope-letter {
+            position: absolute; top: 10px; left: 15px; right: 15px; bottom: 10px;
+            background: #fff;
+            border-radius: 5px;
+            z-index: 2;
+            transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.8s;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes pulse-seal {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        .sparkle {
+            position: absolute;
+            width: 3px; height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px var(--rose-gold), 0 0 15px 4px var(--fuchsia);
+            animation: twinkle 2s infinite alternate;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .floating-flower {
+            position: absolute;
+            opacity: 0.4;
+            animation: float-slow 6s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* --- ESTILO NOVO DO SELO DE CERA 3D --- */
+        .seal {
+            position: absolute; top: 120px; left: 50%; transform: translate(-50%, -50%);
+            width: 75px; height: 75px;
+            /* Cor de cera Marsala/Fúcsia Escuro com brilho radial simulando volume */
+            background: radial-gradient(circle at 35% 35%, #D9027D 0%, #8A004F 45%, #4A002A 100%);
+            border-radius: 50%;
+            z-index: 5;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            /* Múltiplas sombras imitando o relevo grosso e imperfeito da cera */
+            box-shadow: 
+                inset -3px -3px 8px rgba(0,0,0,0.7),
+                inset 2px 2px 8px rgba(255,255,255,0.4),
+                0 5px 15px rgba(0,0,0,0.5),
+                0 0 0 2px #8A004F,
+                0 0 0 4px rgba(138, 0, 79, 0.8);
+            color: var(--gold-light); 
+            font-family: 'Great Vibes', cursive; 
+            font-size: 38px;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        /* Círculo interno em baixo relevo da cera */
+        .seal::before {
+            content: '';
+            position: absolute;
+            top: 7px; left: 7px; right: 7px; bottom: 7px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                inset 1px 1px 5px rgba(0,0,0,0.8),
+                0px 0px 2px rgba(255,255,255,0.3);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Efeito de pulso pulsante em volta do selo */
+        .seal::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            animation: pulse-seal 2s infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Efeito de carimbo (baixo relevo) na letra M */
+        .seal span {
+            position: relative;
+            z-index: 2;
+            text-shadow: -1px -1px 2px rgba(0,0,0,0.8), 1px 1px 1px rgba(255,255,255,0.3);
+        }
+        
+        .seal:hover { transform: translate(-50%, -50%) scale(1.05); }
+        
+        @keyframes pulse-seal {
+            0% { box-shadow: 0 0 0 0 rgba(138, 0, 79, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(138, 0, 79, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(138, 0, 79, 0); }
+        }
+        
+        /* Eventos de Animação - Abrindo o Envelope */
+        .is-open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .is-open .seal { opacity: 0; pointer-events: none; }
+        .is-open .envelope-letter { transform: translateY(-160px); }
+        .is-open { transform: translateY(120px) scale(0.9); opacity: 0; transition: transform 1.2s ease 1.8s, opacity 1s ease 1.8s; }
+        .hide-scene { opacity: 0; pointer-events: none; }
+
+        /* Main Content Container */
+        #main-content {
+            opacity: 0;
+            visibility: hidden;
+            height: 100vh;
+            overflow-y: auto;
+            position: relative;
+            z-index: 20;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+            visibility: visible;
+            animation: slideUpFade 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* Decorative Elements */
+        .floral-corner {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            opacity: 0.15;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="%23D9027D" d="M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z"/></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        .top-left { top: -20px; left: -20px; transform: rotate(-45deg); }
+        .bottom-right { bottom: -20px; right: -20px; transform: rotate(135deg); }
+
+        .card-container {
+            box-shadow: 0 20px 40px rgba(138, 0, 79, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-border {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid var(--gold-mid);
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
+        .btn-action {
+            background: var(--fuchsia);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(217, 2, 125, 0.3);
+        }
+        .btn-action:hover {
+            background: var(--fuchsia-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 2, 125, 0.5);
+        }
+        .btn-action-outline {
+            background: transparent;
+            color: var(--fuchsia);
+            border: 1px solid var(--fuchsia);
+            transition: all 0.3s ease;
+        }
+        .btn-action-outline:hover {
+            background: var(--rose-gold-light);
+        }
+
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-out;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: translateY(50px) scale(0.95);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        /* Botão de Som Flutuante */
+        .btn-som {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #111;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            z-index: 90;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-som:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <!-- Elemento oculto que carrega a música local -->
+    <audio id="local-audio-player" loop preload="auto">
+        <source src="Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video) - Deparea.m4a" type="audio/mp4">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Botão de controle flutuante -->
+    <button class="btn-som" id="muter" onclick="alternarSom()">🔈 Ouvir Música de Fundo</button>
+
+    <!-- Fundo de Imagens (Fotos da Duda) -->
+    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none">
+        <img src="Maria eduarda costa vidal-branco.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-100">
+        <img src="Maria eduarda costa vidal-rosa.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+        <div class="absolute inset-0 bg-white/30"></div> <!-- Overlay sutil para garantir a leitura do convite principal -->
+    </div>
+    
+    <!-- Canvas da Raspadinha Mágica -->
+    <canvas id="scratch-canvas" class="fixed inset-0 z-[5] pointer-events-none"></canvas>
+
+    <div id="envelope-scene" style="overflow: hidden;">
+        
+        <!-- Enfeites: Flores e Brilhos Mágicos -->
+        <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0.5s;"></div>
+        <div class="sparkle" style="top: 30%; left: 80%; animation-delay: 1.2s;"></div>
+        <div class="sparkle" style="top: 70%; left: 15%; animation-delay: 0.2s;"></div>
+        <div class="sparkle" style="top: 85%; left: 75%; animation-delay: 1.5s;"></div>
+        <div class="sparkle" style="top: 50%; left: 10%; animation-delay: 0.8s;"></div>
+        <div class="sparkle" style="top: 45%; left: 90%; animation-delay: 0.3s;"></div>
+
+        <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='%23B76E79' d='M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z'/></svg>" class="floating-flower w-20 h-20 md:w-32 md:h-32" style="top: 10%; left: 5%;">
+        <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='%23D9027D' d='M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z'/></svg>" class="floating-flower w-24 h-24 md:w-40 md:h-40" style="bottom: 5%; right: 5%; animation-delay: 1s;">
+        <i class="fa-solid fa-leaf floating-flower text-[var(--rose-gold)] text-3xl md:text-5xl" style="top: 25%; right: 10%; animation-delay: 2s; opacity: 0.2;"></i>
+        <i class="fa-brands fa-pagelines floating-flower text-[var(--fuchsia-dark)] text-4xl md:text-6xl" style="bottom: 15%; left: 10%; animation-delay: 0.5s; opacity: 0.15;"></i>
+
+        <div id="intro-text" class="mb-12 text-center z-10 transition-opacity duration-500 ease-out">
+            <h2 class="text-[var(--fuchsia-dark)] font-serif text-sm tracking-[0.3em] uppercase mb-2">15 Anos</h2>
+            <p class="font-light text-[var(--fuchsia)] text-xs animate-pulse">Toque no selo para abrir</p>
+        </div>
+        
+        <div class="envelope-wrapper">
+            <div class="envelope-back"></div>
+            <div class="envelope-letter">
+                <h1 class="font-script text-3xl text-[var(--fuchsia-dark)] mt-2">Maria Eduarda</h1>
+                <div class="h-[1px] w-12 bg-gold-gradient my-2"></div>
+                <p class="font-serif text-xs text-[var(--rose-gold)]">Convite Especial</p>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-flap"></div>
+            <div class="seal" onclick="openInvite()"><span>M</span></div>
+        </div>
+    </div>
+
+    <div id="main-content" class="flex items-center justify-center py-10 px-4 md:px-0">
+        
+        <div class="card-container bg-white w-full max-w-lg rounded-2xl p-8 md:p-12 text-center relative z-10">
+            <!-- Decorative borders and corners -->
+            <div class="card-border"></div>
+            <div class="floral-corner top-left"></div>
+            <div class="floral-corner bottom-right"></div>
+            
+            <!-- Header -->
+            <div class="mb-8">
+                <p class="text-xs uppercase tracking-[0.3em] text-[var(--fuchsia)] font-semibold mb-3">Você é meu convidado especial</p>
+                <h1 class="font-script text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-2">
+                    Maria Eduarda
+                </h1>
+                <h2 class="font-serif italic text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
+            </div>
+
+            <!-- Divider -->
+            <div class="flex items-center justify-center gap-4 mb-8">
+                <div class="h-[1px] w-12 bg-gold-gradient"></div>
+                <span class="text-gold text-2xl font-serif">15</span>
+                <div class="h-[1px] w-12 bg-gold-gradient"></div>
+            </div>
+
+            <div class="space-y-6 text-gray-700">
+                <!-- Date & Time -->
+                <div>
+                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Quando</h3>
+                    <p class="text-xl font-light">16 de Janeiro de 2027</p>
+                    <p class="text-md font-light text-[var(--rose-gold)]">às 22 horas</p>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Onde</h3>
+                    <p class="font-medium text-lg">Chevallier Eventos</p>
+                    <p class="text-sm font-light mt-1 text-gray-500 leading-relaxed max-w-[250px] mx-auto">
+                        Av. Doca de Sousa Franco,<br>
+                        R. 28 de Setembro, N 1160<br>
+                        Reduto, Belém - PA<br>
+                        CEP: 66053-355
+                    </p>
+                </div>
+
+                <!-- Dress Code Preview -->
+                <div>
+                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Traje</h3>
+                    <p class="text-md font-light uppercase tracking-wider text-[var(--rose-gold)]">Esporte Fino</p>
+                </div>
+            </div>
+
+            <div class="mt-10 space-y-3">
+                <!-- Manual do Convite -->
+                <button onclick="showInfo('manual')" class="btn-action-outline w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Manual do Convite
+                </button>
+
+                <!-- Código de Vestimenta -->
+                <button onclick="showInfo('traje')" class="btn-action-outline w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Código de Vestimenta
+                </button>
+
+                <!-- Sugestão de Presentes -->
+                <button onclick="showInfo('presentes')" class="btn-action-outline w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                    Sugestão de Presentes
+                </button>
+
+                <!-- Localização (Abre Mapa direto) -->
+                <a href="https://maps.google.com/?q=Chevallier+Eventos+-+Av.+Doca+de+Sousa+Franco,+R.+28+de+Setembro,+N+1160+-+Reduto,+Belém+-+PA,+66053-355" target="_blank" rel="noopener noreferrer" 
+                   class="btn-action w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Localização
+                </a>
+
+                <!-- Confirmação de Presença -->
+                <button onclick="showInfo('rsvp')" class="btn-action w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Confirmação de Presença
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="info-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4">
+        <div class="modal-content bg-white w-full max-w-xl rounded-3xl p-8 relative shadow-2xl border-2 border-[var(--rose-gold-light)] max-h-[90vh] overflow-y-auto">
+            <!-- Botão Fechar -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-[var(--fuchsia)] transition-colors p-2 z-10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <!-- Conteúdo Dinâmico -->
+            <h3 id="modal-title" class="font-serif text-2xl text-[var(--fuchsia-dark)] mb-4 text-center border-b border-gray-100 pb-3"></h3>
+            <div id="modal-body" class="text-gray-600 text-center text-sm md:text-base space-y-4 font-light leading-relaxed">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function alternarSom() {
+            const botao = document.getElementById('muter');
+            const player = document.getElementById('local-audio-player');
+            
+            if (player.paused || player.muted) {
+                player.muted = false;
+                player.volume = 0.5; // Volume agradável para fundo
+                player.play().then(() => {
+                    botao.innerText = "🔊 Mutar Música";
+                    botao.style.backgroundColor = "var(--fuchsia)"; 
+                }).catch(err => {
+                    console.log("O navegador bloqueou o áudio:", err);
+                });
+            } else {
+                player.pause();
+                botao.innerText = "🔈 Ouvir Música de Fundo";
+                botao.style.backgroundColor = "#111";
+            }
+        }
+
+        function openInvite() {
+            // Tenta dar play na música automaticamente ao clicar no selo
+            const player = document.getElementById('local-audio-player');
+            const botao = document.getElementById('muter');
+            
+            if (player) {
+                player.volume = 0.5;
+                player.play().then(() => {
+                    botao.innerText = "🔊 Mutar Música";
+                    botao.style.backgroundColor = "var(--fuchsia)";
+                }).catch(err => console.log("Aguardando interação:", err));
+            }
+
+            const scene = document.getElementById('envelope-scene');
+            const wrapper = document.querySelector('.envelope-wrapper');
+            const mainContent = document.getElementById('main-content');
+            
+            // Oculta suavemente o texto que dá conflito visual
+            const introText = document.getElementById('intro-text');
+            if(introText) {
+                introText.style.opacity = '0';
+                introText.style.pointerEvents = 'none';
+            }
+            
+            wrapper.classList.add('is-open');
+            
+            setTimeout(() => {
+                scene.classList.add('hide-scene');
+                mainContent.classList.add('visible');
+                document.body.style.overflow = 'auto';
+
+                setTimeout(() => {
+                    scene.style.display = 'none';
+                }, 1000);
+            }, 2600); 
+        }
+
+        function showInfo(type) {
+            const modal = document.getElementById('info-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            
+            if (type === 'manual') {
+                modalTitle.innerText = 'Manual do Convite';
+                modalBody.innerHTML = '<p>Para o conforto de todos, é indispensável a apresentação do nome na lista de convidados na entrada do evento.</p>';
+            } else if (type === 'traje') {
+                modalTitle.innerText = 'Código de Vestimenta';
+                modalBody.innerHTML = `
+                    <div class="text-center mb-6">
+                        <p class="text-base text-gray-700">O traje sugerido é <span class="font-bold text-[var(--gold-dark)] uppercase tracking-wider">Esporte Fino</span>.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-6">
+                        <!-- Para Elas -->
+                        <div class="bg-white p-5 rounded-2xl border border-[var(--rose-gold-light)] shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute -right-4 -bottom-4 opacity-[0.03] text-7xl text-[var(--fuchsia)]"><i class="fa-solid fa-person-dress"></i></div>
+                            <h4 class="font-serif text-[var(--fuchsia-dark)] text-lg mb-4 flex items-center gap-2 border-b border-[var(--rose-gold-light)] pb-2 relative z-10">
+                                <i class="fa-solid fa-person-dress text-[var(--fuchsia)]"></i> Para Elas
+                            </h4>
+                            <ul class="space-y-3 text-sm text-gray-700 relative z-10">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-shirt text-[var(--fuchsia)] mt-1 opacity-70 w-4 text-center"></i>
+                                    <span>Vestidos longos, midi, curtos ou macacões elegantes.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-shoe-prints text-[var(--fuchsia)] mt-1 opacity-70 w-4 text-center"></i>
+                                    <span>Salto alto, sandálias finas ou sapatilhas luxuosas.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Para Eles -->
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                            <div class="absolute -right-4 -bottom-4 opacity-[0.03] text-7xl text-[var(--gold-dark)]"><i class="fa-solid fa-user-tie"></i></div>
+                            <h4 class="font-serif text-[var(--gold-dark)] text-lg mb-4 flex items-center gap-2 border-b border-gray-200 pb-2 relative z-10">
+                                <i class="fa-solid fa-user-tie text-[var(--gold-dark)]"></i> Para Eles
+                            </h4>
+                            <ul class="space-y-3 text-sm text-gray-700 relative z-10">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-user-tie text-[var(--gold-dark)] mt-1 opacity-70 w-4 text-center"></i>
+                                    <span>Camisa social, calça social ou sarja. (Blazer opcional).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-shoe-prints text-[var(--gold-dark)] mt-1 opacity-70 w-4 text-center"></i>
+                                    <span>Sapato social ou sapatênis arrumado.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Paleta de Cores Integrada dentro de Traje -->
+                    <div class="text-center mb-6 pt-6 border-t border-gray-100">
+                        <p class="text-base text-gray-700 mb-6 font-serif">Para mantermos a harmonia da nossa festa, sugerimos os seguintes tons para o seu look:</p>
+                        
+                        <div class="flex flex-wrap justify-center gap-6 mb-8">
+                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-14 h-14 rounded-full bg-black shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Preto</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-14 h-14 rounded-full bg-[#1A2421] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Verde<br>Escuro</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-14 h-14 rounded-full bg-[#E3D3C4] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Nude</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-14 h-14 rounded-full bg-[#1A2A40] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Azul<br>Marinho</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Prata</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#F8E1E7]/70 p-5 rounded-2xl border border-[var(--rose-gold)] text-[var(--fuchsia-dark)] mt-2 shadow-sm relative overflow-hidden">
+                            <div class="absolute -right-4 -top-4 opacity-[0.05] text-8xl text-[var(--fuchsia)]"><i class="fa-solid fa-ban"></i></div>
+                            <h5 class="font-serif text-lg mb-3 flex items-center justify-center gap-2 relative z-10">
+                                <i class="fa-solid fa-gem"></i> Cor Restrita
+                            </h5>
+                            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                                <div class="w-12 h-12 rounded-full bg-[var(--fuchsia)] shadow-inner border-2 border-white ring-2 ring-[var(--fuchsia-dark)] relative flex items-center justify-center">
+                                    <div class="w-full h-0.5 bg-white rotate-45 transform absolute"></div>
+                                </div>
+                                <p class="text-sm text-left max-w-[200px] leading-relaxed">
+                                    Pedimos com carinho que evitem a cor <strong class="uppercase tracking-wider">Fúcsia</strong>, pois foi reservada para a Debutante.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-gray-100 text-center">
+                        <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Inspiração Visual</p>
+                        <img src="exemplo de vestimento.png" alt="Exemplo de Vestimenta" onerror="this.src='https://placehold.co/300x400/F8E1E7/8A004F?text=Exemplo+de+Vestimenta'" class="w-full max-w-[300px] mx-auto h-auto rounded-xl border border-gray-200 shadow-sm object-contain">
+                    </div>
+                `;
+            } else if (type === 'presentes') {
+                modalTitle.innerText = 'Sugestão de Presentes';
+                modalBody.innerHTML = '<p>A sua presença é o meu maior presente! Mas, se desejar me presentear, ficarei muito feliz com qualquer mimo que tocar seu coração, ou através de PIX.</p>';
+            } else if (type === 'rsvp') {
+                modalTitle.innerText = 'Confirmação de Presença';
+                modalBody.innerHTML = '<p>Por favor, confirme sua presença entrando em contato via WhatsApp com os pais da debutante.</p><a href="#" class="inline-block mt-4 text-white bg-[var(--fuchsia)] px-8 py-3 rounded-full font-medium hover:bg-[var(--fuchsia-dark)] transition-all shadow-lg hover:-translate-y-1">Avisar no WhatsApp</a>';
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.remove('active');
+        }
+
+        // Alternância de Fotos de Fundo
+        const bgImages = document.querySelectorAll('.slide-img');
+        let currentBg = 0;
+        setInterval(() => {
+            if(bgImages.length > 0) {
+                bgImages[currentBg].style.opacity = '0';
+                currentBg = (currentBg + 1) % bgImages.length;
+                bgImages[currentBg].style.opacity = '1';
+            }
+        }, 4000); // Troca de foto a cada 4 segundos
+
+        // Lógica da Raspadinha Mágica
+        const canvas = document.getElementById('scratch-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Fundo original reproduzido no canvas para cobrir as fotos
+            const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, Math.max(canvas.width, canvas.height));
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(1, '#F8E1E7');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        window.addEventListener('resize', initCanvas);
+        initCanvas(); 
+
+        function scratch(x, y) {
+            ctx.globalCompositeOperation = 'destination-out';
+            const radius = 120; // Tamanho do pincel mágico
+            const brush = ctx.createRadialGradient(x, y, 0, x, y, radius);
+            brush.addColorStop(0, 'rgba(0,0,0,1)');
+            brush.addColorStop(0.3, 'rgba(0,0,0,0.8)');
+            brush.addColorStop(1, 'rgba(0,0,0,0)');
+            
+            ctx.fillStyle = brush;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Eventos de movimento para raspar (apenas se o envelope já abriu)
+        document.addEventListener('mousemove', (e) => {
+            const mainContent = document.getElementById('main-content');
+            if (mainContent && mainContent.classList.contains('visible')) {
+                scratch(e.clientX, e.clientY);
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            const mainContent = document.getElementById('main-content');
+            if (mainContent && mainContent.classList.contains('visible') && e.touches.length > 0) {
+                scratch(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, {passive: true});
+
+    </script>
+</body>
+</html>
