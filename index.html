@@ -25,15 +25,13 @@
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--rose-gold-light);
-            overflow: hidden; /* Prevents scroll during intro */
+            overflow: hidden; 
             margin: 0;
             padding: 0;
             touch-action: manipulation;
-            /* Custom cursor - Estrela mágica */
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%23D9027D' opacity='0.8'><path d='M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z'/></svg>") 16 16, auto;
         }
 
-        /* Gold Gradient Text */
         .text-gold {
             background: linear-gradient(to right, var(--gold-dark), var(--gold-mid), var(--gold-light), var(--gold-mid), var(--gold-dark));
             -webkit-background-clip: text;
@@ -43,228 +41,112 @@
             animation: shine 5s linear infinite;
         }
 
-        /* Gold Gradient Border/Background */
         .bg-gold-gradient {
             background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-mid) 25%, var(--gold-light) 50%, var(--gold-mid) 75%, var(--gold-dark) 100%);
             background-size: 200% 200%;
             animation: gradientMove 5s ease infinite;
         }
 
-        /* Typography */
-        .font-script {
-            font-family: 'Great Vibes', cursive;
-        }
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
+        .font-script { font-family: 'Great Vibes', cursive; }
+        .font-serif { font-family: 'Playfair Display', serif; }
 
-        /* Animations */
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
+        @keyframes shine { to { background-position: 200% center; } }
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         @keyframes slideUpFade {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         #envelope-scene {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--rose-gold-light) 0%, #fff 100%);
-            z-index: 50;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            perspective: 1000px;
-            transition: opacity 1s ease-in-out;
+            z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            perspective: 1000px; transition: opacity 1s ease-in-out;
         }
         
-        .envelope-wrapper {
-            position: relative;
-            width: 320px; height: 200px;
-            transition: transform 1s ease;
-        }
+        .envelope-wrapper { position: relative; width: 320px; height: 200px; transition: transform 1s ease; }
         
         .envelope-back {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--fuchsia-dark);
-            border-radius: 8px;
+            background-color: var(--fuchsia-dark); border-radius: 8px;
             box-shadow: 0 15px 35px rgba(138, 0, 79, 0.3);
         }
         
         .envelope-front {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border-left: 160px solid rgba(217, 2, 125, 0.95); /* Fúcsia */
+            border-left: 160px solid rgba(217, 2, 125, 0.95);
             border-right: 160px solid rgba(217, 2, 125, 0.95);
             border-bottom: 100px solid var(--fuchsia-dark);
-            border-top: 100px solid transparent;
-            border-radius: 8px;
-            z-index: 3;
-            pointer-events: none;
+            border-top: 100px solid transparent; border-radius: 8px; z-index: 3; pointer-events: none;
         }
         
         .envelope-flap {
-            position: absolute; top: 0; left: 0;
-            width: 0; height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 160px solid transparent; border-right: 160px solid transparent;
             border-top: 120px solid var(--fuchsia);
-            transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 4;
+            transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 4;
         }
         
         .envelope-letter {
             position: absolute; top: 10px; left: 15px; right: 15px; bottom: 10px;
-            background: #fff;
-            border-radius: 5px;
-            z-index: 2;
+            background: #fff; border-radius: 5px; z-index: 2;
             transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.8s;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
-        
-        @keyframes pulse-seal {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.5); }
-        }
 
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-        .sparkle {
-            position: absolute;
-            width: 3px; height: 3px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px var(--rose-gold), 0 0 15px 4px var(--fuchsia);
-            animation: twinkle 2s infinite alternate;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .floating-flower {
-            position: absolute;
-            opacity: 0.4;
-            animation: float-slow 6s ease-in-out infinite;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        /* --- ESTILO NOVO DO SELO DE CERA 3D --- */
         .seal {
             position: absolute; top: 120px; left: 50%; transform: translate(-50%, -50%);
             width: 75px; height: 75px;
-            /* Cor de cera Marsala/Fúcsia Escuro com brilho radial simulando volume */
             background: radial-gradient(circle at 35% 35%, #D9027D 0%, #8A004F 45%, #4A002A 100%);
-            border-radius: 50%;
-            z-index: 5;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            /* Múltiplas sombras imitando o relevo grosso e imperfeito da cera */
-            box-shadow: 
-                inset -3px -3px 8px rgba(0,0,0,0.7),
-                inset 2px 2px 8px rgba(255,255,255,0.4),
-                0 5px 15px rgba(0,0,0,0.5),
-                0 0 0 2px #8A004F,
-                0 0 0 4px rgba(138, 0, 79, 0.8);
-            color: var(--gold-light); 
-            font-family: 'Great Vibes', cursive; 
-            font-size: 38px;
+            border-radius: 50%; z-index: 5; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.7), inset 2px 2px 8px rgba(255,255,255,0.4), 0 5px 15px rgba(0,0,0,0.5), 0 0 0 2px #8A004F, 0 0 0 4px rgba(138, 0, 79, 0.8);
+            color: var(--gold-light); font-family: 'Great Vibes', cursive; font-size: 38px;
             transition: opacity 0.3s, transform 0.3s;
         }
-
-        /* Círculo interno em baixo relevo da cera */
         .seal::before {
-            content: '';
-            position: absolute;
-            top: 7px; left: 7px; right: 7px; bottom: 7px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                inset 1px 1px 5px rgba(0,0,0,0.8),
-                0px 0px 2px rgba(255,255,255,0.3);
-            pointer-events: none;
-            z-index: 1;
+            content: ''; position: absolute; top: 7px; left: 7px; right: 7px; bottom: 7px;
+            border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 1px 1px 5px rgba(0,0,0,0.8), 0px 0px 2px rgba(255,255,255,0.3); pointer-events: none; z-index: 1;
         }
-
-        /* Efeito de pulso pulsante em volta do selo */
         .seal::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 50%;
-            animation: pulse-seal 2s infinite;
-            z-index: 0;
-            pointer-events: none;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%; animation: pulse-seal 2s infinite; z-index: 0; pointer-events: none;
         }
-
-        /* Efeito de carimbo (baixo relevo) na letra M */
-        .seal span {
-            position: relative;
-            z-index: 2;
-            text-shadow: -1px -1px 2px rgba(0,0,0,0.8), 1px 1px 1px rgba(255,255,255,0.3);
-        }
-        
+        .seal span { position: relative; z-index: 2; text-shadow: -1px -1px 2px rgba(0,0,0,0.8), 1px 1px 1px rgba(255,255,255,0.3); }
         .seal:hover { transform: translate(-50%, -50%) scale(1.05); }
-        
+
         @keyframes pulse-seal {
             0% { box-shadow: 0 0 0 0 rgba(138, 0, 79, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(138, 0, 79, 0); }
             100% { box-shadow: 0 0 0 0 rgba(138, 0, 79, 0); }
         }
-        
-        /* Eventos de Animação - Abrindo o Envelope */
+
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.5); } }
+        @keyframes float-slow { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
+        .sparkle {
+            position: absolute; width: 3px; height: 3px; background: white; border-radius: 50%;
+            box-shadow: 0 0 10px 2px var(--rose-gold), 0 0 15px 4px var(--fuchsia); animation: twinkle 2s infinite alternate; z-index: 1; pointer-events: none;
+        }
+        .floating-flower { position: absolute; opacity: 0.4; animation: float-slow 6s ease-in-out infinite; z-index: 1; pointer-events: none; }
+
         .is-open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .is-open .seal { opacity: 0; pointer-events: none; }
         .is-open .envelope-letter { transform: translateY(-160px); }
         .is-open { transform: translateY(120px) scale(0.9); opacity: 0; transition: transform 1.2s ease 1.8s, opacity 1s ease 1.8s; }
         .hide-scene { opacity: 0; pointer-events: none; }
 
-        /* Main Content Container */
-        #main-content {
-            opacity: 0;
-            visibility: hidden;
-            height: 100vh;
-            overflow-y: auto;
-            position: relative;
-            z-index: 20;
-        }
+        #main-content { opacity: 0; visibility: hidden; height: 100vh; overflow-y: auto; position: relative; z-index: 20; }
+        #main-content.visible { opacity: 1; visibility: visible; animation: slideUpFade 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: 0.3s; }
 
-        #main-content.visible {
-            opacity: 1;
-            visibility: visible;
-            animation: slideUpFade 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-            animation-delay: 0.3s;
-        }
-
-        /* Decorative Elements */
         .floral-corner {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            opacity: 0.15;
-            pointer-events: none;
+            position: absolute; width: 150px; height: 150px; opacity: 0.15; pointer-events: none;
             background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="%23D9027D" d="M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z"/></svg>');
-            background-repeat: no-repeat;
-            background-size: contain;
+            background-repeat: no-repeat; background-size: contain;
         }
         .top-left { top: -20px; left: -20px; transform: rotate(-45deg); }
         .bottom-right { bottom: -20px; right: -20px; transform: rotate(135deg); }
@@ -273,82 +155,33 @@
             box-shadow: 0 20px 40px rgba(138, 0, 79, 0.15);
             position: relative;
             overflow: hidden;
+            /* Borda sutil para dar o efeito de vidro */
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .card-border {
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid var(--gold-mid);
-            pointer-events: none;
-            border-radius: 12px;
+            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid var(--gold-mid); pointer-events: none; border-radius: 12px;
         }
 
-        .btn-action {
-            background: var(--fuchsia);
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(217, 2, 125, 0.3);
-        }
-        .btn-action:hover {
-            background: var(--fuchsia-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(217, 2, 125, 0.5);
-        }
-        .btn-action-outline {
-            background: transparent;
-            color: var(--fuchsia);
-            border: 1px solid var(--fuchsia);
-            transition: all 0.3s ease;
-        }
-        .btn-action-outline:hover {
-            background: var(--rose-gold-light);
-        }
+        .btn-action { background: var(--fuchsia); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(217, 2, 125, 0.3); }
+        .btn-action:hover { background: var(--fuchsia-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217, 2, 125, 0.5); }
+        .btn-action-outline { background: rgba(255,255,255,0.8); color: var(--fuchsia); border: 1px solid var(--fuchsia); transition: all 0.3s ease; }
+        .btn-action-outline:hover { background: var(--rose-gold-light); }
 
-        .modal-overlay {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease-out;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            transform: translateY(50px) scale(0.95);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .modal-overlay.active .modal-content {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
+        .modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease-out; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: translateY(50px) scale(0.95); opacity: 0; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); opacity: 1; }
 
-        /* Botão de Som Flutuante */
         .btn-som {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #111;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            z-index: 90;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.1);
+            position: fixed; bottom: 20px; right: 20px; background-color: #111; color: white; padding: 10px 16px; border-radius: 50px;
+            font-size: 12px; z-index: 90; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
         }
         .btn-som:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body>
-
     <!-- Elemento oculto que carrega a música local -->
     <audio id="local-audio-player" loop preload="auto">
         <source src="Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video) - Deparea.m4a" type="audio/mp4">
@@ -358,15 +191,13 @@
     <!-- Botão de controle flutuante -->
     <button class="btn-som" id="muter" onclick="alternarSom()">🔈 Ouvir Música de Fundo</button>
 
-    <!-- Fundo de Imagens (Fotos da Duda) -->
-    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none">
+    <!-- Fundo de Imagens - Começa oculto e é revelado pela Lanterna -->
+    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none opacity-0 transition-opacity duration-1000">
         <img src="Maria eduarda costa vidal-branco.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-100">
         <img src="Maria eduarda costa vidal-rosa.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-        <div class="absolute inset-0 bg-white/30"></div> <!-- Overlay sutil para garantir a leitura do convite principal -->
+        <!-- Overlay sutil para garantir a leitura perfeita do convite principal sobre a foto -->
+        <div class="absolute inset-0 bg-white/20"></div>
     </div>
-    
-    <!-- Canvas da Raspadinha Mágica -->
-    <canvas id="scratch-canvas" class="fixed inset-0 z-[5] pointer-events-none"></canvas>
 
     <div id="envelope-scene" style="overflow: hidden;">
         
@@ -403,7 +234,8 @@
 
     <div id="main-content" class="flex items-center justify-center py-10 px-4 md:px-0">
         
-        <div class="card-container bg-white w-full max-w-lg rounded-2xl p-8 md:p-12 text-center relative z-10">
+        <!-- Cartão com fundo transparente e desfoque (bg-white/50 backdrop-blur-md) -->
+        <div class="card-container bg-white/50 backdrop-blur-md w-full max-w-lg rounded-2xl p-8 md:p-12 text-center relative z-10">
             <!-- Decorative borders and corners -->
             <div class="card-border"></div>
             <div class="floral-corner top-left"></div>
@@ -412,7 +244,7 @@
             <!-- Header -->
             <div class="mb-8">
                 <p class="text-xs uppercase tracking-[0.3em] text-[var(--fuchsia)] font-semibold mb-3">Você é meu convidado especial</p>
-                <h1 class="font-script text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-2">
+                <h1 class="font-script text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-2 drop-shadow-sm">
                     Maria Eduarda
                 </h1>
                 <h2 class="font-serif italic text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
@@ -425,19 +257,19 @@
                 <div class="h-[1px] w-12 bg-gold-gradient"></div>
             </div>
 
-            <div class="space-y-6 text-gray-700">
+            <div class="space-y-6 text-gray-800">
                 <!-- Date & Time -->
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Quando</h3>
-                    <p class="text-xl font-light">16 de Janeiro de 2027</p>
-                    <p class="text-md font-light text-[var(--rose-gold)]">às 22 horas</p>
+                    <p class="text-xl font-medium">16 de Janeiro de 2027</p>
+                    <p class="text-md font-medium text-[var(--rose-gold)]">às 22 horas</p>
                 </div>
 
                 <!-- Location -->
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Onde</h3>
                     <p class="font-medium text-lg">Chevallier Eventos</p>
-                    <p class="text-sm font-light mt-1 text-gray-500 leading-relaxed max-w-[250px] mx-auto">
+                    <p class="text-sm font-medium mt-1 text-gray-700 leading-relaxed max-w-[250px] mx-auto">
                         Av. Doca de Sousa Franco,<br>
                         R. 28 de Setembro, N 1160<br>
                         Reduto, Belém - PA<br>
@@ -448,7 +280,7 @@
                 <!-- Dress Code Preview -->
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Traje</h3>
-                    <p class="text-md font-light uppercase tracking-wider text-[var(--rose-gold)]">Esporte Fino</p>
+                    <p class="text-md font-medium uppercase tracking-wider text-[var(--rose-gold)]">Esporte Fino</p>
                 </div>
             </div>
 
@@ -553,6 +385,10 @@
                 scene.classList.add('hide-scene');
                 mainContent.classList.add('visible');
                 document.body.style.overflow = 'auto';
+
+                // Ativa a visibilidade do fundo para a lanterna funcionar!
+                document.getElementById('bg-images').style.opacity = '1';
+                targetSpotlightSize = window.innerWidth > 768 ? 400 : 250;
 
                 setTimeout(() => {
                     scene.style.display = 'none';
@@ -688,53 +524,39 @@
             }
         }, 4000); // Troca de foto a cada 4 segundos
 
-        // Lógica da Raspadinha Mágica
-        const canvas = document.getElementById('scratch-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            // Fundo original reproduzido no canvas para cobrir as fotos
-            const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, Math.max(canvas.width, canvas.height));
-            gradient.addColorStop(0, '#ffffff');
-            gradient.addColorStop(1, '#F8E1E7');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-        
-        window.addEventListener('resize', initCanvas);
-        initCanvas(); 
+        // --- EFEITO MÁSCARA/LANTERNA (Substituindo o antigo Canvas de Raspar) ---
+        const bgImagesContainer = document.getElementById('bg-images');
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let spotlightSize = 0; 
+        let targetSpotlightSize = 0;
 
-        function scratch(x, y) {
-            ctx.globalCompositeOperation = 'destination-out';
-            const radius = 120; // Tamanho do pincel mágico
-            const brush = ctx.createRadialGradient(x, y, 0, x, y, radius);
-            brush.addColorStop(0, 'rgba(0,0,0,1)');
-            brush.addColorStop(0.3, 'rgba(0,0,0,0.8)');
-            brush.addColorStop(1, 'rgba(0,0,0,0)');
-            
-            ctx.fillStyle = brush;
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        // Eventos de movimento para raspar (apenas se o envelope já abriu)
         document.addEventListener('mousemove', (e) => {
-            const mainContent = document.getElementById('main-content');
-            if (mainContent && mainContent.classList.contains('visible')) {
-                scratch(e.clientX, e.clientY);
-            }
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
 
         document.addEventListener('touchmove', (e) => {
-            const mainContent = document.getElementById('main-content');
-            if (mainContent && mainContent.classList.contains('visible') && e.touches.length > 0) {
-                scratch(e.touches[0].clientX, e.touches[0].clientY);
+            if(e.touches.length > 0) {
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
             }
         }, {passive: true});
+
+        function updateSpotlight() {
+            // Suavização do movimento e expansão da máscara de luz
+            spotlightSize += (targetSpotlightSize - spotlightSize) * 0.1;
+
+            if (spotlightSize > 5) {
+                // Cria uma máscara em formato circular focada no cursor que acompanha o movimento
+                const mask = `radial-gradient(circle ${spotlightSize}px at ${mouseX}px ${mouseY}px, black 30%, transparent 100%)`;
+                bgImagesContainer.style.webkitMaskImage = mask;
+                bgImagesContainer.style.maskImage = mask;
+            }
+
+            requestAnimationFrame(updateSpotlight);
+        }
+        updateSpotlight();
 
     </script>
 </body>
