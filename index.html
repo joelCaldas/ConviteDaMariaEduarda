@@ -68,18 +68,20 @@
             perspective: 1200px; transition: opacity 1s ease-in-out;
         }
 
+        /* Imagem inicial totalmente nítida (sem efeito fosco/blur) */
         .initial-bg-container {
             position: absolute; inset: 0; z-index: 0; overflow: hidden;
         }
         .initial-bg-img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
+            width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
             animation: slowZoom 20s ease-in-out infinite alternate;
-            filter: brightness(0.95) contrast(1.05);
+            filter: brightness(1.03) contrast(1.06);
         }
         .initial-bg-overlay {
             position: absolute; inset: 0;
-            background: radial-gradient(circle at center, rgba(248, 225, 231, 0.25) 0%, rgba(58, 5, 16, 0.78) 100%);
-            backdrop-filter: blur(1.5px);
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.0) 35%, rgba(58, 5, 16, 0.35) 100%);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
         /* Canvas 3D do Jardim Real de Rosas */
@@ -272,7 +274,7 @@
                 opacity: 1;
             }
             100% {
-                transform: translate(-50%, -50%) translate3d(var(-- sx), var(--sy), 0) rotate(var(--sr)) scale(0.25);
+                transform: translate(-50%, -50%) translate3d(var(--sx), var(--sy), 0) rotate(var(--sr)) scale(0.25);
                 opacity: 0;
             }
         }
@@ -312,22 +314,22 @@
         /* Estilo das caixas do Cronômetro */
         .countdown-box-initial {
             background: rgba(58, 5, 16, 0.65);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(212, 175, 55, 0.5);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
         }
 
         .countdown-box-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(212, 175, 55, 0.45);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid rgba(212, 175, 55, 0.5);
             box-shadow: 0 4px 15px rgba(138, 0, 79, 0.08);
             transition: background 0.4s ease;
         }
         .card-container:hover .countdown-box-card {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
         }
 
         #main-content { 
@@ -367,24 +369,25 @@
         .top-left { top: -20px; left: -20px; transform: rotate(-45deg); }
         .bottom-right { bottom: -20px; right: -20px; transform: rotate(135deg); }
 
+        /* Cartão principal ultra transparente para revelar as fotos ao fundo */
         .card-container {
-            box-shadow: 0 20px 40px rgba(138, 0, 79, 0.15);
+            box-shadow: 0 15px 35px rgba(138, 0, 79, 0.12);
             position: relative;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
             transition: background 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease, box-shadow 0.5s ease;
-            text-shadow: 0 1px 6px rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95), 0 0 4px rgba(255, 255, 255, 0.85);
         }
 
         .card-container:hover,
         .card-container:active {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(1px);
-            -webkit-backdrop-filter: blur(1px);
-            box-shadow: 0 20px 50px rgba(138, 0, 79, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            box-shadow: 0 20px 50px rgba(138, 0, 79, 0.2);
         }
 
         .card-border {
@@ -392,9 +395,9 @@
             border: 1px solid var(--gold-mid); pointer-events: none; border-radius: 12px;
         }
 
-        .btn-action { background: var(--fuchsia); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(217, 2, 125, 0.3); }
+        .btn-action { background: var(--fuchsia); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(217, 2, 125, 0.3); text-shadow: none; }
         .btn-action:hover { background: var(--fuchsia-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217, 2, 125, 0.5); }
-        .btn-action-outline { background: rgba(255,255,255,0.85); color: var(--fuchsia); border: 1px solid var(--fuchsia); transition: all 0.3s ease; }
+        .btn-action-outline { background: rgba(255,255,255,0.75); color: var(--fuchsia); border: 1px solid var(--fuchsia); transition: all 0.3s ease; text-shadow: none; }
         .btn-action-outline:hover { background: var(--rose-gold-light); }
 
         .modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease-out; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
@@ -412,7 +415,7 @@
 <body>
 
     <audio id="local-audio-player" loop preload="auto">
-        <source src="Goodness Of God - Cece Winans ( tradução em português) - Perseguindo O Propósito.m4a" type="audio/mp4">
+        <source src="CeCe Winans - Goodness of God - Instrumental Cover with Lyrics - Tanner Tracks Premiere.m4a" type="audio/mp4">
     </audio>
 
     <button class="btn-som" id="muter" onclick="alternarSom()">🔈 Ouvir Música de Fundo</button>
@@ -444,17 +447,13 @@
 
             <!-- Símbolo da Rosa 3D Realista em Camadas -->
             <g id="rose-3d-symbol" filter="url(#drop-3d)">
-                <!-- Folhas Douradas e Verdes na Base -->
                 <path d="M50,50 Q15,20 5,45 Q20,65 50,50 Z" fill="url(#gold-leaf-grad)" opacity="0.9" />
                 <path d="M50,50 Q85,15 95,40 Q80,65 50,50 Z" fill="url(#gold-leaf-grad)" opacity="0.85" />
                 <path d="M50,50 Q50,90 25,95 Q30,70 50,50 Z" fill="#2E4A36" opacity="0.8" />
-                <!-- Pétalas Externas -->
                 <path d="M50,10 C20,10 10,40 25,65 C40,85 60,85 75,65 C90,40 80,10 50,10 Z" fill="url(#rose-3d-fuchsia)" />
                 <path d="M15,45 C10,20 40,5 65,15 C85,25 90,55 70,75 C50,90 20,70 15,45 Z" fill="url(#rose-3d-fuchsia)" opacity="0.9" />
-                <!-- Pétalas Intermediárias com Sombra -->
                 <path d="M50,18 C28,18 20,42 32,60 C44,75 56,75 68,60 C80,42 72,18 50,18 Z" fill="url(#rose-3d-pink)" />
                 <path d="M25,42 C25,22 50,14 68,26 C82,38 78,62 60,72 C42,80 25,62 25,42 Z" fill="url(#rose-3d-fuchsia)" />
-                <!-- Miolo 3D Espiral -->
                 <path d="M50,28 C35,28 30,45 40,56 C48,65 58,63 64,54 C70,45 65,28 50,28 Z" fill="url(#rose-3d-pink)" />
                 <path d="M38,44 C38,34 50,28 58,36 C65,44 60,56 50,58 C42,60 38,52 38,44 Z" fill="url(#rose-3d-fuchsia)" />
                 <path d="M45,44 C45,39 51,37 55,41 C58,45 55,51 50,52 C46,52 45,48 45,44 Z" fill="#FFF0F5" opacity="0.85" />
@@ -470,22 +469,31 @@
         </defs>
     </svg>
 
-    <!-- Fundo de Imagens c/ Efeito Lanterna (Spotlight) após abrir o convite -->
+    <!-- Fundo de Imagens c/ Efeito Lanterna (Spotlight) e mais fotos trocando no fundo -->
     <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none" style="opacity: 0; transition: opacity 1s;">
-        <div id="spotlight-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; -webkit-mask-image: radial-gradient(circle 0px at center, black 30%, transparent 100%); mask-image: radial-gradient(circle 0px at center, black 30%, transparent 100%);">
+        <div id="spotlight-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; -webkit-mask-image: radial-gradient(circle 0px at center, black 35%, transparent 100%); mask-image: radial-gradient(circle 0px at center, black 35%, transparent 100%);">
             <img src="inicil de pagina.jfif" onerror="this.src='inicil de pagina_2.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-100">
             <img src="Maria eduarda costa vidal-branco.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
             <img src="Maria eduarda costa vidal-rosa.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <div class="absolute inset-0 bg-white/10"></div>
+            <img src="WhatsApp Image 2026-10-17 at 16.01.57.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.01.58 (1).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.01.58.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.00 (1).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.00 (2).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.00.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.01 (1).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.01.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.00.51.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <div class="absolute inset-0 bg-white/5"></div>
         </div>
     </div>
 
-    <!-- Cena 3D: Jardim Real de Rosas (Ciclo Vivo + Chuva de Pétalas com destaque Fúcsia) -->
+    <!-- Cena 3D: Jardim Real de Rosas -->
     <div id="roses-3d-canvas"></div>
     
     <div id="envelope-scene" style="overflow: hidden;">
         
-        <!-- Imagem Inicial na Raiz da Pasta -->
+        <!-- Imagem Inicial na Raiz da Pasta (Nítida e sem fosco) -->
         <div class="initial-bg-container">
             <img src="inicil de pagina.jfif" onerror="this.onerror=null; this.src='inicil de pagina_2.jfif';" alt="Maria Eduarda - 15 Anos" class="initial-bg-img">
             <div class="initial-bg-overlay"></div>
@@ -513,7 +521,7 @@
             <svg class="w-20 h-20 md:w-32 md:h-32 transform rotate-90"><use href="#rose-3d-symbol"/></svg>
         </div>
 
-        <!-- Flores 2D (Vetoriais Douradas e Rosê ao fundo) -->
+        <!-- Flores 2D -->
         <div class="rose-2d-wrapper" style="top: 22%; left: 14%; animation-delay: -1.5s;">
             <svg class="w-16 h-16 md:w-24 md:h-24"><use href="#flower-2d-symbol"/></svg>
         </div>
@@ -527,30 +535,21 @@
         <!-- Container de Pétalas 3D Caindo -->
         <div id="petals-container" class="absolute inset-0 pointer-events-none z-10 overflow-hidden"></div>
 
-        <!-- Título Superior e Versículos em Dourado -->
+        <!-- 1ª Parte: Apenas o Versículo em Dourado -->
         <div id="intro-text" class="mb-4 sm:mb-6 text-center z-20 transition-all duration-700 ease-out px-4 max-w-xl mx-auto">
-            <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-gold font-semibold mb-1 drop-shadow">Maria Eduarda</p>
-            <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-gold drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-3" style="line-height: 1.1;">Meus 15 Anos</h2>
+            <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-gold font-semibold mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">Maria Eduarda</p>
+            <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-gold drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] mb-3" style="line-height: 1.1;">Meus 15 Anos</h2>
             
-            <!-- 1º e 2º Títulos (Versículo e Frase) Tudo em Dourado -->
-            <div class="bg-[#3A0510]/70 backdrop-blur-md border border-[var(--gold-mid)]/50 rounded-2xl p-3 sm:p-4 mb-3.5 shadow-[0_8px_25px_rgba(0,0,0,0.5)] space-y-2.5">
-                <div>
-                    <p class="font-serif italic text-xs sm:text-sm md:text-base text-gold leading-snug drop-shadow">
-                        “O Senhor fez grandes coisas por nós, e por isso estamos alegres”
-                    </p>
-                    <p class="font-serif text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold font-bold mt-0.5">
-                        Salmos 126:3
-                    </p>
-                </div>
-                <div class="h-[1px] w-20 bg-gold-gradient mx-auto opacity-60"></div>
-                <div>
-                    <p class="font-serif italic text-[11px] sm:text-xs md:text-sm text-gold leading-relaxed drop-shadow">
-                        “O valor das coisas não está no tempo que elas duram, mas na intensidade com que elas acontecem.”
-                    </p>
-                </div>
+            <div class="bg-[#3A0510]/65 backdrop-blur-sm border border-[var(--gold-mid)]/60 rounded-2xl p-3.5 sm:p-4 mb-3.5 shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
+                <p class="font-serif italic text-xs sm:text-sm md:text-base text-gold leading-snug drop-shadow">
+                    “O Senhor fez grandes coisas por nós, e por isso estamos alegres”
+                </p>
+                <p class="font-serif text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold font-bold mt-1">
+                    Salmos 126:3
+                </p>
             </div>
 
-            <p class="font-serif italic text-[var(--marsala-dark)] text-xs sm:text-sm animate-pulse bg-white/85 px-5 py-1.5 rounded-full shadow-lg backdrop-blur-md inline-block border border-[var(--gold-mid)]">
+            <p class="font-serif italic text-[var(--marsala-dark)] text-xs sm:text-sm animate-pulse bg-white/90 px-5 py-1.5 rounded-full shadow-lg inline-block border border-[var(--gold-mid)]">
                 ✨ Toque no selo para quebrar e abrir ✨
             </p>
         </div>
@@ -579,7 +578,7 @@
 
         <!-- Cronômetro em Tempo Real (Logo Abaixo da Carta) -->
         <div id="initial-countdown" class="mt-5 sm:mt-7 z-20 text-center transition-all duration-700 ease-out px-4">
-            <p class="font-serif italic text-white text-xs sm:text-sm mb-2.5 tracking-widest uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <p class="font-serif italic text-white text-xs sm:text-sm mb-2.5 tracking-widest uppercase drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                 <i class="fa-regular fa-clock text-[var(--gold-light)] mr-1"></i> Contagem Regressiva para o Grande Dia
             </p>
             <div class="flex items-center justify-center gap-2 sm:gap-3">
@@ -587,17 +586,17 @@
                     <span class="cd-days font-serif text-2xl sm:text-3xl font-bold text-gold block leading-none">00</span>
                     <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-[var(--rose-gold-light)] mt-1 block font-medium">Dias</span>
                 </div>
-                <span class="text-gold font-bold text-xl sm:text-2xl -mt-3">:</span>
+                <span class="text-gold font-bold text-xl sm:text-2xl -mt-3 drop-shadow">:</span>
                 <div class="countdown-box-initial rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5 min-w-[64px] sm:min-w-[76px] transform hover:scale-105 transition-transform">
                     <span class="cd-hours font-serif text-2xl sm:text-3xl font-bold text-gold block leading-none">00</span>
                     <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-[var(--rose-gold-light)] mt-1 block font-medium">Horas</span>
                 </div>
-                <span class="text-gold font-bold text-xl sm:text-2xl -mt-3">:</span>
+                <span class="text-gold font-bold text-xl sm:text-2xl -mt-3 drop-shadow">:</span>
                 <div class="countdown-box-initial rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5 min-w-[64px] sm:min-w-[76px] transform hover:scale-105 transition-transform">
                     <span class="cd-minutes font-serif text-2xl sm:text-3xl font-bold text-gold block leading-none">00</span>
                     <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-[var(--rose-gold-light)] mt-1 block font-medium">Minutos</span>
                 </div>
-                <span class="text-gold font-bold text-xl sm:text-2xl -mt-3">:</span>
+                <span class="text-gold font-bold text-xl sm:text-2xl -mt-3 drop-shadow">:</span>
                 <div class="countdown-box-initial rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5 min-w-[64px] sm:min-w-[76px] transform hover:scale-105 transition-transform">
                     <span class="cd-seconds font-serif text-2xl sm:text-3xl font-bold text-gold block leading-none">00</span>
                     <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-[var(--rose-gold-light)] mt-1 block font-medium">Segundos</span>
@@ -618,25 +617,16 @@
             <svg class="w-14 h-14 absolute bottom-2 left-2 opacity-80 pointer-events-none transform rotate-180"><use href="#rose-3d-symbol"/></svg>
 
             <div class="mb-5 sm:mb-6">
-                <p class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--fuchsia)] font-semibold mb-3">Você é meu convidado especial</p>
+                <p class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--fuchsia)] font-bold mb-3">Você é meu convidado especial</p>
                 <h1 class="font-script text-5xl sm:text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-1 sm:mb-2">
                     Maria Eduarda
                 </h1>
-                <h2 class="font-serif italic text-xl sm:text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
+                <h2 class="font-serif italic text-xl sm:text-2xl text-[var(--rose-gold)] font-semibold">Costa Vidal</h2>
             </div>
 
-            <!-- Versículo e Frase em Dourado no Cartão Principal -->
-            <div class="bg-[#3A0510]/65 hover:bg-[#3A0510]/45 transition-colors duration-500 backdrop-blur-sm rounded-2xl p-4 mb-6 shadow-md border border-[var(--gold-mid)] space-y-2.5">
-                <div>
-                    <p class="font-serif italic text-xs sm:text-sm text-gold leading-relaxed">
-                        “O Senhor fez grandes coisas por nós, e por isso estamos alegres”
-                    </p>
-                    <p class="font-serif text-[10px] uppercase tracking-[0.25em] text-gold font-bold mt-1">
-                        Salmos 126:3
-                    </p>
-                </div>
-                <div class="h-[1px] w-16 bg-gold-gradient mx-auto opacity-60"></div>
-                <p class="font-serif italic text-[11px] sm:text-xs text-gold leading-relaxed">
+            <!-- 2ª Parte: Apenas a Frase em Dourado no Cartão Principal -->
+            <div class="bg-[#3A0510]/55 hover:bg-[#3A0510]/35 transition-colors duration-500 backdrop-blur-sm rounded-2xl p-4 mb-6 shadow-md border border-[var(--gold-mid)]">
+                <p class="font-serif italic text-xs sm:text-sm text-gold leading-relaxed">
                     “O valor das coisas não está no tempo que elas duram, mas na intensidade com que elas acontecem.”
                 </p>
             </div>
@@ -647,40 +637,40 @@
                 <div class="h-[1px] w-12 bg-gold-gradient"></div>
             </div>
 
-            <div class="space-y-5 text-gray-800 font-medium">
+            <div class="space-y-5 text-gray-900 font-semibold">
                 <div>
-                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Quando</h3>
-                    <p class="text-xl font-semibold">16 de Janeiro de 2027</p>
-                    <p class="text-md text-[var(--rose-gold)]">às 22 horas</p>
+                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-bold mb-1">Quando</h3>
+                    <p class="text-xl font-bold">16 de Janeiro de 2027</p>
+                    <p class="text-md text-[var(--marsala-light)] font-semibold">às 22 horas</p>
                 </div>
 
                 <!-- Cronômetro Integrado no Cartão Principal -->
                 <div class="py-2">
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-[var(--marsala-light)] font-semibold mb-2">Faltam apenas:</p>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-[var(--marsala-light)] font-bold mb-2">Faltam apenas:</p>
                     <div class="grid grid-cols-4 gap-2 max-w-xs mx-auto">
                         <div class="countdown-box-card rounded-xl p-2">
                             <span class="cd-days font-serif text-xl sm:text-2xl font-bold text-[var(--fuchsia-dark)] block">00</span>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-500 font-semibold">Dias</span>
+                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-700 font-bold">Dias</span>
                         </div>
                         <div class="countdown-box-card rounded-xl p-2">
                             <span class="cd-hours font-serif text-xl sm:text-2xl font-bold text-[var(--fuchsia-dark)] block">00</span>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-500 font-semibold">Horas</span>
+                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-700 font-bold">Horas</span>
                         </div>
                         <div class="countdown-box-card rounded-xl p-2">
                             <span class="cd-minutes font-serif text-xl sm:text-2xl font-bold text-[var(--fuchsia-dark)] block">00</span>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-500 font-semibold">Min</span>
+                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-700 font-bold">Min</span>
                         </div>
                         <div class="countdown-box-card rounded-xl p-2">
                             <span class="cd-seconds font-serif text-xl sm:text-2xl font-bold text-[var(--fuchsia)] block">00</span>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-500 font-semibold">Seg</span>
+                            <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-gray-700 font-bold">Seg</span>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Onde</h3>
-                    <p class="text-lg font-semibold">Chevallier Eventos</p>
-                    <p class="text-xs sm:text-sm mt-1 text-gray-700 leading-relaxed max-w-[250px] mx-auto">
+                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-bold mb-1">Onde</h3>
+                    <p class="text-lg font-bold">Chevallier Eventos</p>
+                    <p class="text-xs sm:text-sm mt-1 text-gray-800 font-medium leading-relaxed max-w-[250px] mx-auto">
                         Av. Doca de Sousa Franco,<br>
                         R. 28 de Setembro, N 1160<br>
                         Reduto, Belém - PA<br>
@@ -689,8 +679,8 @@
                 </div>
 
                 <div>
-                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Traje</h3>
-                    <p class="text-md uppercase tracking-wider text-[var(--rose-gold)] font-semibold">Esporte Fino</p>
+                    <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-bold mb-1">Traje</h3>
+                    <p class="text-md uppercase tracking-wider text-[var(--marsala-light)] font-bold">Esporte Fino</p>
                 </div>
             </div>
 
@@ -722,7 +712,7 @@
 
     <!-- Modal Informativo -->
     <div id="info-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4">
-        <div class="modal-content bg-white w-full max-w-xl rounded-3xl p-8 relative shadow-2xl border-2 border-[var(--rose-gold-light)] max-h-[90vh] overflow-y-auto">
+        <div class="modal-content bg-white w-full max-w-xl rounded-3xl p-6 sm:p-8 relative shadow-2xl border-2 border-[var(--rose-gold-light)] max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-[var(--fuchsia)] transition-colors p-2 z-10">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -733,6 +723,24 @@
     </div>
 
     <script>
+        function alternarSom() {
+            const player = document.getElementById('local-audio-player');
+            const botao = document.getElementById('muter');
+            
+            if (player.paused || player.muted) {
+                player.muted = false;
+                player.volume = 0.5; 
+                player.play().then(() => {
+                    botao.innerText = "🔊 Mutar Música";
+                    botao.style.backgroundColor = "var(--fuchsia)"; 
+                }).catch(err => console.log("O navegador bloqueou o áudio:", err));
+            } else {
+                player.pause();
+                botao.innerText = "🔈 Ouvir Música de Fundo";
+                botao.style.backgroundColor = "#111";
+            }
+        }
+
         // --- Cronômetro Regressivo em Tempo Real para 16 de Janeiro de 2027 às 22:00 ---
         const eventDate = new Date('2027-01-16T22:00:00').getTime();
 
@@ -853,7 +861,6 @@
                 const ctx = new AudioCtx();
                 const now = ctx.currentTime;
 
-                // Estalo principal e fragmentos da cera quebrando
                 const snapTimes = [0, 0.045, 0.09, 0.15];
                 snapTimes.forEach((offset, idx) => {
                     const bufferSize = ctx.sampleRate * 0.06;
@@ -882,7 +889,6 @@
                     whiteNoise.start(now + offset);
                 });
 
-                // Impacto seco inicial no lacre
                 const osc = ctx.createOscillator();
                 const oscGain = ctx.createGain();
                 osc.type = 'triangle';
@@ -930,7 +936,7 @@
                 const angle = (i / shardCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
                 const dist = 60 + Math.random() * 130;
                 const sx = Math.cos(angle) * dist;
-                const sy = Math.sin(angle) * dist + 35; // Leve gravidade
+                const sy = Math.sin(angle) * dist + 35;
                 const sr = (Math.random() - 0.5) * 620;
 
                 shard.style.setProperty('--sx', `${sx}px`);
@@ -948,17 +954,14 @@
             if (isInviteOpening) return;
             isInviteOpening = true;
 
-            // 1. Efeito Sonoro da Cera Quebrando
             playWaxBreakSound();
 
-            // 2. Animação de Rachadura e Estilhaços do Selo de Cera
             const sealEl = document.getElementById('wax-seal');
             if (sealEl) {
                 sealEl.classList.add('cracking');
                 spawnWaxSealShards(sealEl);
             }
 
-            // 3. Inicia a Música de Fundo (Goodness Of God)
             const player = document.getElementById('local-audio-player');
             const botao = document.getElementById('muter');
             
@@ -988,7 +991,6 @@
                 initialCountdown.style.pointerEvents = 'none';
             }
             
-            // Aguarda a quebra do selo (300ms) para levantar a aba do envelope
             setTimeout(() => {
                 wrapper.classList.add('is-open');
             }, 300);
@@ -1010,7 +1012,7 @@
                 document.body.style.overflow = 'auto';
                 
                 document.getElementById('bg-images').style.opacity = '1';
-                targetSpotlightSize = window.innerWidth > 768 ? 400 : 250;
+                targetSpotlightSize = window.innerWidth > 768 ? 420 : 270;
 
                 const canvas3d = document.getElementById('roses-3d-canvas');
                 if (canvas3d) {
@@ -1032,7 +1034,100 @@
             
             if (type === 'manual') {
                 modalTitle.innerText = 'Manual do Convite';
-                modalBody.innerHTML = '<p>Para o conforto de todos, é indispensável a apresentação do nome na lista de convidados na entrada do evento.</p>';
+                modalBody.innerHTML = `
+                    <div class="text-left space-y-5">
+                        <!-- Aviso Principal da Lista -->
+                        <div class="bg-[#F8E1E7]/70 p-4 rounded-2xl border border-[var(--rose-gold)] text-center shadow-sm">
+                            <p class="text-sm text-[var(--fuchsia-dark)] font-medium">
+                                <i class="fa-solid fa-clipboard-check mr-1"></i> Para o conforto de todos, é indispensável a apresentação do nome na lista de convidados na entrada do evento.
+                            </p>
+                        </div>
+
+                        <!-- Passo a Passo: Como Usar o Convite -->
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                            <h4 class="font-serif text-lg text-[var(--fuchsia-dark)] font-bold border-b border-[var(--rose-gold-light)] pb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-[var(--fuchsia)]"></i> Passo a Passo: Como Usar o Convite
+                            </h4>
+
+                            <div class="space-y-2">
+                                <h5 class="font-semibold text-sm text-[var(--gold-dark)] flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-[var(--fuchsia)] text-white text-xs flex items-center justify-center font-bold">1</span>
+                                    Abertura e Música:
+                                </h5>
+                                <ul class="list-disc list-inside text-xs sm:text-sm text-gray-700 space-y-1.5 pl-2">
+                                    <li>Na tela inicial, toque diretamente sobre o <strong>selo de cera com a letra "M"</strong>.</li>
+                                    <li>Ao tocar, o selo quebra com efeito sonoro e visual, liberando a explosão de pétalas e iniciando a música de fundo automaticamente.</li>
+                                    <li>Para pausar ou retomar a música a qualquer momento, use o botão no canto inferior direito (<strong>🔈 / 🔊 Ouvir Música de Fundo</strong>).</li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-2 pt-2 border-t border-gray-100">
+                                <h5 class="font-semibold text-sm text-[var(--gold-dark)] flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-[var(--fuchsia)] text-white text-xs flex items-center justify-center font-bold">2</span>
+                                    Interação com as Fotos de Fundo:
+                                </h5>
+                                <ul class="list-disc list-inside text-xs sm:text-sm text-gray-700 space-y-1.5 pl-2">
+                                    <li>Mova o cursor do mouse (ou deslize o dedo na tela do celular) para acionar o efeito lanterna (<em>spotlight</em>) e revelar as fotos da Maria Eduarda que alternam no fundo.</li>
+                                    <li>Ao passar o cursor ou manter o toque sobre a carta principal, o painel fica ainda mais translúcido para destacar o ensaio fotográfico.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Funções de Cada Botão -->
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                            <h4 class="font-serif text-lg text-[var(--fuchsia-dark)] font-bold border-b border-[var(--rose-gold-light)] pb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-hand-pointer text-[var(--fuchsia)]"></i> Funções de Cada Botão
+                            </h4>
+
+                            <!-- Botão Código de Vestimenta -->
+                            <div class="bg-[#F8E1E7]/30 p-3.5 rounded-xl border border-[var(--rose-gold-light)] space-y-1.5">
+                                <h5 class="font-serif font-bold text-[var(--fuchsia-dark)] text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-vest-patches text-[var(--fuchsia)]"></i> Código de Vestimenta:
+                                </h5>
+                                <p class="text-xs sm:text-sm text-gray-700"><strong>O que faz:</strong> Abre uma janela explicativa sobre o estilo recomendado (<strong>Esporte Fino</strong>).</p>
+                                <div class="text-xs text-gray-700 space-y-1 pl-2 pt-1">
+                                    <p class="font-semibold text-[var(--marsala-light)]">Informações exibidas:</p>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>Orientações de peças e calçados para convidadas e convidados.</li>
+                                        <li>Paleta de cores sugeridas para os looks (Preto, Verde Escuro, Nude, Azul Marinho e Prata).</li>
+                                        <li><strong>Cores Restritas:</strong> Alerta para evitar <strong>Fúcsia, Rosê Gold e Dourado</strong> (exclusivas da Debutante e decoração).</li>
+                                        <li><strong>Restrição Masculina:</strong> Alerta para os homens evitarem <strong>Cinza Claro</strong> (reservado aos Valsantes/Cavalheiros) e <strong>Branco</strong> (reservado ao Príncipe).</li>
+                                        <li>Foto de referência visual do estilo.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Botão Sugestão de Presentes -->
+                            <div class="bg-[#F8E1E7]/30 p-3.5 rounded-xl border border-[var(--rose-gold-light)] space-y-1.5">
+                                <h5 class="font-serif font-bold text-[var(--fuchsia-dark)] text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-gift text-[var(--fuchsia)]"></i> Sugestão de Presentes:
+                                </h5>
+                                <p class="text-xs sm:text-sm text-gray-700"><strong>O que faz:</strong> Abre a tela com as preferências e medidas da aniversariante.</p>
+                                <div class="text-xs text-gray-700 space-y-1 pl-2 pt-1">
+                                    <p class="font-semibold text-[var(--marsala-light)]">Informações exibidas:</p>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li><strong>Calçado:</strong> Nº 37.</li>
+                                        <li><strong>Vestimenta:</strong> Nº 42.</li>
+                                        <li><strong>Tamanho:</strong> M.</li>
+                                        <li><strong>Preferências:</strong> Perfumes e Maquiagem.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Botão Localização -->
+                            <div class="bg-[#F8E1E7]/30 p-3.5 rounded-xl border border-[var(--rose-gold-light)] space-y-1.5">
+                                <h5 class="font-serif font-bold text-[var(--fuchsia-dark)] text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-[var(--fuchsia)]"></i> Link Externo do Google Maps — Localização:
+                                </h5>
+                                <ul class="list-disc list-inside text-xs sm:text-sm text-gray-700 space-y-1 pl-1">
+                                    <li><strong>O que faz:</strong> Direciona o convidado diretamente para o aplicativo ou site do Google Maps.</li>
+                                    <li><strong>Destino configurado:</strong> Chevallier Eventos — Av. Doca de Sousa Franco, R. 28 de Setembro, Nº 1160, Reduto, Belém - PA.</li>
+                                    <li><strong>Utilidade:</strong> Permite ao convidado traçar rotas de carro, transporte público ou solicitar motoristas por aplicativo diretamente até o local.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
             } else if (type === 'traje') {
                 modalTitle.innerText = 'Código de Vestimenta';
                 modalBody.innerHTML = `
@@ -1102,10 +1197,11 @@
                             </div>
                         </div>
 
+                        <!-- Cores Restritas: Debutante e Decoração -->
                         <div class="bg-[#F8E1E7]/70 p-5 rounded-2xl border border-[var(--rose-gold)] text-[var(--fuchsia-dark)] mt-2 shadow-sm relative overflow-hidden">
                             <div class="absolute -right-4 -top-4 opacity-[0.05] text-8xl text-[var(--fuchsia)]"><i class="fa-solid fa-ban"></i></div>
                             <h5 class="font-serif text-lg mb-4 flex items-center justify-center gap-2 relative z-10 font-bold">
-                                <i class="fa-solid fa-gem"></i> Cores Restritas
+                                <i class="fa-solid fa-gem"></i> Cores Restritas (Debutante & Decoração)
                             </h5>
                             <div class="flex flex-col items-center justify-center gap-4 relative z-10">
                                 <div class="flex items-center justify-center gap-5 sm:gap-7">
@@ -1134,6 +1230,43 @@
                                 <p class="text-sm text-center max-w-md leading-relaxed mt-1">
                                     Pedimos com carinho que evitem as cores <strong class="uppercase tracking-wider">Fúcsia</strong>, <strong class="uppercase tracking-wider">Rosê Gold</strong> e <strong class="uppercase tracking-wider">Dourado</strong>, pois foram reservadas exclusivamente para a Debutante e a harmonia da decoração.
                                 </p>
+                            </div>
+                        </div>
+
+                        <!-- Restrição para Convidados Homens (Valsantes e Príncipe) -->
+                        <div class="bg-gray-100/90 p-5 rounded-2xl border border-gray-300 text-gray-800 mt-4 shadow-sm relative overflow-hidden">
+                            <div class="absolute -right-4 -top-4 opacity-[0.05] text-8xl text-gray-600"><i class="fa-solid fa-user-tie"></i></div>
+                            <h5 class="font-serif text-lg mb-4 flex items-center justify-center gap-2 relative z-10 font-bold text-gray-900">
+                                <i class="fa-solid fa-crown text-[var(--gold-dark)]"></i> Restrição para Convidados Homens
+                            </h5>
+                            <div class="flex flex-col items-center justify-center gap-4 relative z-10">
+                                <div class="flex items-center justify-center gap-8 sm:gap-10">
+                                    <!-- Cinza Claro -->
+                                    <div class="flex flex-col items-center gap-1.5">
+                                        <div class="w-12 h-12 rounded-full bg-[#D1D5DB] shadow-inner border-2 border-white ring-2 ring-gray-400 relative flex items-center justify-center">
+                                            <div class="w-full h-0.5 bg-red-600 rotate-45 transform absolute"></div>
+                                        </div>
+                                        <span class="text-[10px] uppercase tracking-wider font-bold text-gray-700">Cinza Claro</span>
+                                        <span class="text-[9px] text-gray-500 font-medium -mt-1">Cavalheiros (Valsantes)</span>
+                                    </div>
+                                    <!-- Branco -->
+                                    <div class="flex flex-col items-center gap-1.5">
+                                        <div class="w-12 h-12 rounded-full bg-white shadow-inner border-2 border-gray-200 ring-2 ring-gray-400 relative flex items-center justify-center">
+                                            <div class="w-full h-0.5 bg-red-600 rotate-45 transform absolute"></div>
+                                        </div>
+                                        <span class="text-[10px] uppercase tracking-wider font-bold text-gray-700">Branco</span>
+                                        <span class="text-[9px] text-gray-500 font-medium -mt-1">Traje do Príncipe</span>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-center max-w-md leading-relaxed mt-1 space-y-1.5">
+                                    <p>
+                                        Pedimos aos <strong>convidados homens</strong> que evitem trajes nas cores <strong class="uppercase tracking-wider">Cinza Claro</strong> e <strong class="uppercase tracking-wider">Branco</strong>:
+                                    </p>
+                                    <p class="text-xs bg-white/80 py-2 px-3 rounded-xl border border-gray-200 text-gray-700">
+                                        • <strong>Cavalheiros (Valsantes):</strong> vestirão <strong class="uppercase">Cinza Claro</strong>.<br>
+                                        • <strong>Príncipe:</strong> vestirá <strong class="uppercase">Branco</strong>.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1210,7 +1343,7 @@
                 currentBg = (currentBg + 1) % bgImages.length;
                 bgImages[currentBg].style.opacity = '1';
             }
-        }, 4000);
+        }, 3500);
 
         // --- Efeito Lanterna / Spotlight e Paralaxe 3D das Rosas ---
         const spotlightMaskContainer = document.getElementById('spotlight-mask');
@@ -1246,7 +1379,7 @@
             spotlightSize += (targetSpotlightSize - spotlightSize) * 0.1;
 
             if (spotlightSize > 5 && spotlightMaskContainer) {
-                const mask = `radial-gradient(circle ${spotlightSize}px at ${mouseX}px ${mouseY}px, black 30%, transparent 100%)`;
+                const mask = `radial-gradient(circle ${spotlightSize}px at ${mouseX}px ${mouseY}px, black 35%, transparent 100%)`;
                 spotlightMaskContainer.style.webkitMaskImage = mask;
                 spotlightMaskContainer.style.maskImage = mask;
             }
