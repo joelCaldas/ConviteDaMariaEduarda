@@ -234,6 +234,49 @@
         }
         .seal:hover { transform: translate(-50%, -50%) scale(1.08); }
 
+        .seal-crack-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.12s ease;
+        }
+        .seal.cracking {
+            animation: seal-shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+        }
+        .seal.cracking .seal-crack-svg {
+            opacity: 1;
+        }
+        @keyframes seal-shake {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            25% { transform: translate(-53%, -48%) scale(1.12) rotate(-6deg); }
+            50% { transform: translate(-47%, -52%) scale(0.95) rotate(6deg); }
+            75% { transform: translate(-52%, -49%) scale(1.06) rotate(-4deg); }
+            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        }
+        .wax-shard {
+            position: fixed;
+            pointer-events: none;
+            z-index: 75;
+            background: radial-gradient(circle at 30% 30%, var(--marsala-light), var(--marsala-mid) 60%, var(--marsala-dark));
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.35), 0 6px 14px rgba(0,0,0,0.65);
+            border: 1px solid rgba(226, 178, 185, 0.3);
+            animation: shard-fly 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes shard-fly {
+            0% {
+                transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) translate3d(var(-- sx), var(--sy), 0) rotate(var(--sr)) scale(0.25);
+                opacity: 0;
+            }
+        }
+
         @keyframes pulse-seal {
             0% { box-shadow: 0 0 0 0 rgba(217, 2, 125, 0.7); }
             70% { box-shadow: 0 0 0 18px rgba(217, 2, 125, 0); }
@@ -276,9 +319,15 @@
         }
 
         .countdown-box-card {
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(212, 175, 55, 0.45);
             box-shadow: 0 4px 15px rgba(138, 0, 79, 0.08);
+            transition: background 0.4s ease;
+        }
+        .card-container:hover .countdown-box-card {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         #main-content { 
@@ -322,10 +371,20 @@
             box-shadow: 0 20px 40px rgba(138, 0, 79, 0.15);
             position: relative;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            transition: background 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+            text-shadow: 0 1px 6px rgba(255, 255, 255, 0.85);
+        }
+
+        .card-container:hover,
+        .card-container:active {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            box-shadow: 0 20px 50px rgba(138, 0, 79, 0.25);
         }
 
         .card-border {
@@ -353,7 +412,7 @@
 <body>
 
     <audio id="local-audio-player" loop preload="auto">
-        <source src="Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video) - Deparea.m4a" type="audio/mp4">
+        <source src="Goodness Of God - Cece Winans ( tradução em português) - Perseguindo O Propósito.m4a" type="audio/mp4">
     </audio>
 
     <button class="btn-som" id="muter" onclick="alternarSom()">🔈 Ouvir Música de Fundo</button>
@@ -468,12 +527,31 @@
         <!-- Container de Pétalas 3D Caindo -->
         <div id="petals-container" class="absolute inset-0 pointer-events-none z-10 overflow-hidden"></div>
 
-        <!-- Título Superior -->
-        <div id="intro-text" class="mb-6 sm:mb-8 text-center z-20 transition-all duration-700 ease-out px-4">
-            <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[var(--gold-light)] font-semibold mb-1 drop-shadow">Maria Eduarda</p>
-            <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-gold drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-2" style="line-height: 1.15;">Meus 15 Anos</h2>
+        <!-- Título Superior e Versículos em Dourado -->
+        <div id="intro-text" class="mb-4 sm:mb-6 text-center z-20 transition-all duration-700 ease-out px-4 max-w-xl mx-auto">
+            <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-gold font-semibold mb-1 drop-shadow">Maria Eduarda</p>
+            <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-gold drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-3" style="line-height: 1.1;">Meus 15 Anos</h2>
+            
+            <!-- 1º e 2º Títulos (Versículo e Frase) Tudo em Dourado -->
+            <div class="bg-[#3A0510]/70 backdrop-blur-md border border-[var(--gold-mid)]/50 rounded-2xl p-3 sm:p-4 mb-3.5 shadow-[0_8px_25px_rgba(0,0,0,0.5)] space-y-2.5">
+                <div>
+                    <p class="font-serif italic text-xs sm:text-sm md:text-base text-gold leading-snug drop-shadow">
+                        “O Senhor fez grandes coisas por nós, e por isso estamos alegres”
+                    </p>
+                    <p class="font-serif text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold font-bold mt-0.5">
+                        Salmos 126:3
+                    </p>
+                </div>
+                <div class="h-[1px] w-20 bg-gold-gradient mx-auto opacity-60"></div>
+                <div>
+                    <p class="font-serif italic text-[11px] sm:text-xs md:text-sm text-gold leading-relaxed drop-shadow">
+                        “O valor das coisas não está no tempo que elas duram, mas na intensidade com que elas acontecem.”
+                    </p>
+                </div>
+            </div>
+
             <p class="font-serif italic text-[var(--marsala-dark)] text-xs sm:text-sm animate-pulse bg-white/85 px-5 py-1.5 rounded-full shadow-lg backdrop-blur-md inline-block border border-[var(--gold-mid)]">
-                ✨ Toque no selo para abrir ✨
+                ✨ Toque no selo para quebrar e abrir ✨
             </p>
         </div>
         
@@ -490,11 +568,17 @@
             </div>
             <div class="envelope-front"></div>
             <div class="envelope-flap"></div>
-            <div class="seal" onclick="openInvite()"><span>M</span></div>
+            <div class="seal" id="wax-seal" onclick="openInvite(event)">
+                <span>M</span>
+                <svg class="seal-crack-svg" viewBox="0 0 100 100">
+                    <path d="M50,50 L20,10 M50,50 L85,20 M50,50 L92,65 M50,50 L55,95 M50,50 L12,75 M35,30 L60,22 M65,60 L35,72" stroke="#1a0005" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                    <path d="M50,50 L22,12 M50,50 L83,22 M50,50 L90,63 M50,50 L53,93 M50,50 L14,73" stroke="#F9F1CC" stroke-width="0.8" stroke-linecap="round" opacity="0.6" fill="none"/>
+                </svg>
+            </div>
         </div>
 
         <!-- Cronômetro em Tempo Real (Logo Abaixo da Carta) -->
-        <div id="initial-countdown" class="mt-7 sm:mt-9 z-20 text-center transition-all duration-700 ease-out px-4">
+        <div id="initial-countdown" class="mt-5 sm:mt-7 z-20 text-center transition-all duration-700 ease-out px-4">
             <p class="font-serif italic text-white text-xs sm:text-sm mb-2.5 tracking-widest uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 <i class="fa-regular fa-clock text-[var(--gold-light)] mr-1"></i> Contagem Regressiva para o Grande Dia
             </p>
@@ -539,6 +623,22 @@
                     Maria Eduarda
                 </h1>
                 <h2 class="font-serif italic text-xl sm:text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
+            </div>
+
+            <!-- Versículo e Frase em Dourado no Cartão Principal -->
+            <div class="bg-[#3A0510]/65 hover:bg-[#3A0510]/45 transition-colors duration-500 backdrop-blur-sm rounded-2xl p-4 mb-6 shadow-md border border-[var(--gold-mid)] space-y-2.5">
+                <div>
+                    <p class="font-serif italic text-xs sm:text-sm text-gold leading-relaxed">
+                        “O Senhor fez grandes coisas por nós, e por isso estamos alegres”
+                    </p>
+                    <p class="font-serif text-[10px] uppercase tracking-[0.25em] text-gold font-bold mt-1">
+                        Salmos 126:3
+                    </p>
+                </div>
+                <div class="h-[1px] w-16 bg-gold-gradient mx-auto opacity-60"></div>
+                <p class="font-serif italic text-[11px] sm:text-xs text-gold leading-relaxed">
+                    “O valor das coisas não está no tempo que elas duram, mas na intensidade com que elas acontecem.”
+                </p>
             </div>
 
             <div class="flex items-center justify-center gap-3 sm:gap-4 mb-6">
@@ -749,27 +849,120 @@
             }
         }
 
-        // --- Controle de Áudio ---
-        function alternarSom() {
-            const player = document.getElementById('local-audio-player');
-            const botao = document.getElementById('muter');
-            
-            if (player.paused || player.muted) {
-                player.muted = false;
-                player.volume = 0.5; 
-                player.play().then(() => {
-                    botao.innerText = "🔊 Mutar Música";
-                    botao.style.backgroundColor = "var(--fuchsia)"; 
-                }).catch(err => console.log("O navegador bloqueou o áudio:", err));
-            } else {
-                player.pause();
-                botao.innerText = "🔈 Ouvir Música de Fundo";
-                botao.style.backgroundColor = "#111";
+        // --- Efeito Sonoro Realista de Cera Quebrando (Web Audio API) ---
+        function playWaxBreakSound() {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const now = ctx.currentTime;
+
+                // Estalo principal e fragmentos da cera quebrando
+                const snapTimes = [0, 0.045, 0.09, 0.15];
+                snapTimes.forEach((offset, idx) => {
+                    const bufferSize = ctx.sampleRate * 0.06;
+                    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const output = noiseBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.25));
+                    }
+
+                    const whiteNoise = ctx.createBufferSource();
+                    whiteNoise.buffer = noiseBuffer;
+
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.setValueAtTime(1100 + idx * 380, now + offset);
+                    filter.Q.setValueAtTime(3.0, now + offset);
+
+                    const gain = ctx.createGain();
+                    const peakGain = idx === 0 ? 0.95 : 0.5 / idx;
+                    gain.gain.setValueAtTime(peakGain, now + offset);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + offset + 0.055);
+
+                    whiteNoise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(ctx.destination);
+                    whiteNoise.start(now + offset);
+                });
+
+                // Impacto seco inicial no lacre
+                const osc = ctx.createOscillator();
+                const oscGain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(190, now);
+                osc.frequency.exponentialRampToValueAtTime(42, now + 0.11);
+
+                oscGain.gain.setValueAtTime(0.7, now);
+                oscGain.gain.exponentialRampToValueAtTime(0.01, now + 0.11);
+
+                osc.connect(oscGain);
+                oscGain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.12);
+            } catch (e) {
+                console.log("Erro ao reproduzir efeito sonoro do selo:", e);
             }
         }
 
-        // --- Abertura do Envelope ---
-        function openInvite() {
+        // --- Partículas do Selo de Cera Quebrando ---
+        function spawnWaxSealShards(sealElement) {
+            if (!sealElement) return;
+            const rect = sealElement.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const shardPolygons = [
+                'polygon(15% 0%, 90% 10%, 100% 75%, 25% 100%, 0% 50%)',
+                'polygon(0% 20%, 80% 0%, 100% 60%, 65% 100%, 10% 85%)',
+                'polygon(25% 0%, 100% 25%, 80% 100%, 0% 75%)',
+                'polygon(10% 10%, 95% 5%, 85% 90%, 20% 95%)'
+            ];
+
+            const shardCount = 16;
+            for (let i = 0; i < shardCount; i++) {
+                const shard = document.createElement('div');
+                shard.className = 'wax-shard';
+
+                const size = 10 + Math.random() * 16;
+                shard.style.width = `${size}px`;
+                shard.style.height = `${size}px`;
+                shard.style.left = `${centerX}px`;
+                shard.style.top = `${centerY}px`;
+                shard.style.clipPath = shardPolygons[i % shardPolygons.length];
+
+                const angle = (i / shardCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+                const dist = 60 + Math.random() * 130;
+                const sx = Math.cos(angle) * dist;
+                const sy = Math.sin(angle) * dist + 35; // Leve gravidade
+                const sr = (Math.random() - 0.5) * 620;
+
+                shard.style.setProperty('--sx', `${sx}px`);
+                shard.style.setProperty('--sy', `${sy}px`);
+                shard.style.setProperty('--sr', `${sr}deg`);
+
+                document.body.appendChild(shard);
+                setTimeout(() => shard.remove(), 1000);
+            }
+        }
+
+        // --- Abertura do Envelope com Quebra do Selo ---
+        let isInviteOpening = false;
+        function openInvite(event) {
+            if (isInviteOpening) return;
+            isInviteOpening = true;
+
+            // 1. Efeito Sonoro da Cera Quebrando
+            playWaxBreakSound();
+
+            // 2. Animação de Rachadura e Estilhaços do Selo de Cera
+            const sealEl = document.getElementById('wax-seal');
+            if (sealEl) {
+                sealEl.classList.add('cracking');
+                spawnWaxSealShards(sealEl);
+            }
+
+            // 3. Inicia a Música de Fundo (Goodness Of God)
             const player = document.getElementById('local-audio-player');
             const botao = document.getElementById('muter');
             
@@ -799,18 +992,21 @@
                 initialCountdown.style.pointerEvents = 'none';
             }
             
-            wrapper.classList.add('is-open');
+            // Aguarda a quebra do selo (300ms) para levantar a aba do envelope
+            setTimeout(() => {
+                wrapper.classList.add('is-open');
+            }, 300);
 
             setTimeout(() => {
                 triggerEnvelopePetalExplosion();
-            }, 250);
+            }, 520);
             
             setTimeout(() => {
                 wrapper.classList.add('letter-expand');
                 if (typeof window.trigger3DPetalExplosion === 'function') {
                     window.trigger3DPetalExplosion();
                 }
-            }, 1200);
+            }, 1450);
             
             setTimeout(() => {
                 scene.classList.add('hide-scene');
@@ -829,7 +1025,7 @@
                 setTimeout(() => {
                     scene.style.display = 'none';
                 }, 1000);
-            }, 2000); 
+            }, 2250); 
         }
 
         // --- Modais Informativos ---
@@ -912,15 +1108,35 @@
 
                         <div class="bg-[#F8E1E7]/70 p-5 rounded-2xl border border-[var(--rose-gold)] text-[var(--fuchsia-dark)] mt-2 shadow-sm relative overflow-hidden">
                             <div class="absolute -right-4 -top-4 opacity-[0.05] text-8xl text-[var(--fuchsia)]"><i class="fa-solid fa-ban"></i></div>
-                            <h5 class="font-serif text-lg mb-3 flex items-center justify-center gap-2 relative z-10">
-                                <i class="fa-solid fa-gem"></i> Cor Restrita
+                            <h5 class="font-serif text-lg mb-4 flex items-center justify-center gap-2 relative z-10 font-bold">
+                                <i class="fa-solid fa-gem"></i> Cores Restritas
                             </h5>
-                            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                                <div class="w-12 h-12 rounded-full bg-[var(--fuchsia)] shadow-inner border-2 border-white ring-2 ring-[var(--fuchsia-dark)] relative flex items-center justify-center">
-                                    <div class="w-full h-0.5 bg-white rotate-45 transform absolute"></div>
+                            <div class="flex flex-col items-center justify-center gap-4 relative z-10">
+                                <div class="flex items-center justify-center gap-5 sm:gap-7">
+                                    <!-- Fúcsia -->
+                                    <div class="flex flex-col items-center gap-1.5">
+                                        <div class="w-12 h-12 rounded-full bg-[var(--fuchsia)] shadow-inner border-2 border-white ring-2 ring-[var(--fuchsia-dark)] relative flex items-center justify-center">
+                                            <div class="w-full h-0.5 bg-white rotate-45 transform absolute"></div>
+                                        </div>
+                                        <span class="text-[10px] uppercase tracking-wider font-bold text-[var(--fuchsia-dark)]">Fúcsia</span>
+                                    </div>
+                                    <!-- Rosê Gold -->
+                                    <div class="flex flex-col items-center gap-1.5">
+                                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#F4C2C2] via-[#B76E79] to-[#8A4B55] shadow-inner border-2 border-white ring-2 ring-[#B76E79] relative flex items-center justify-center">
+                                            <div class="w-full h-0.5 bg-white rotate-45 transform absolute"></div>
+                                        </div>
+                                        <span class="text-[10px] uppercase tracking-wider font-bold text-[#8A4B55]">Rosê Gold</span>
+                                    </div>
+                                    <!-- Dourado -->
+                                    <div class="flex flex-col items-center gap-1.5">
+                                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#F9F1CC] via-[#D4AF37] to-[#AA771C] shadow-inner border-2 border-white ring-2 ring-[#AA771C] relative flex items-center justify-center">
+                                            <div class="w-full h-0.5 bg-white rotate-45 transform absolute"></div>
+                                        </div>
+                                        <span class="text-[10px] uppercase tracking-wider font-bold text-[#AA771C]">Dourado</span>
+                                    </div>
                                 </div>
-                                <p class="text-sm text-left max-w-[200px] leading-relaxed">
-                                    Pedimos com carinho que evitem a cor <strong class="uppercase tracking-wider">Fúcsia</strong>, pois foi reservada para a Debutante.
+                                <p class="text-sm text-center max-w-md leading-relaxed mt-1">
+                                    Pedimos com carinho que evitem as cores <strong class="uppercase tracking-wider">Fúcsia</strong>, <strong class="uppercase tracking-wider">Rosê Gold</strong> e <strong class="uppercase tracking-wider">Dourado</strong>, pois foram reservadas exclusivamente para a Debutante e a harmonia da decoração.
                                 </p>
                             </div>
                         </div>
@@ -933,7 +1149,52 @@
                 `;
             } else if (type === 'presentes') {
                 modalTitle.innerText = 'Sugestão de Presentes';
-                modalBody.innerHTML = '<p>A sua presença é o meu maior presente! Mas, se desejar me presentear, ficarei muito feliz com qualquer mimo que tocar seu coração, ou através de PIX.</p>';
+                modalBody.innerHTML = `
+                    <p class="text-gray-700 mb-5">
+                        A sua presença é o meu maior presente! Mas, se desejar me presentear, aqui estão algumas sugestões com as minhas medidas e preferências:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-left">
+                        <div class="bg-[#F8E1E7]/50 p-4 rounded-2xl border border-[var(--rose-gold-light)] flex items-center gap-4 shadow-sm">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[var(--fuchsia)] text-xl shadow-sm shrink-0">
+                                <i class="fa-solid fa-shoe-prints"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-gray-500 block font-semibold">Calçado</span>
+                                <span class="font-serif text-xl font-bold text-[var(--fuchsia-dark)]">Nº 37</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#F8E1E7]/50 p-4 rounded-2xl border border-[var(--rose-gold-light)] flex items-center gap-4 shadow-sm">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[var(--fuchsia)] text-xl shadow-sm shrink-0">
+                                <i class="fa-solid fa-person-dress"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-gray-500 block font-semibold">Vestimenta</span>
+                                <span class="font-serif text-xl font-bold text-[var(--fuchsia-dark)]">Nº 42</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#F8E1E7]/50 p-4 rounded-2xl border border-[var(--rose-gold-light)] flex items-center gap-4 shadow-sm">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[var(--gold-dark)] text-xl shadow-sm shrink-0">
+                                <i class="fa-solid fa-shirt"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-gray-500 block font-semibold">Tamanho</span>
+                                <span class="font-serif text-xl font-bold text-[var(--fuchsia-dark)]">M</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#F8E1E7]/50 p-4 rounded-2xl border border-[var(--rose-gold-light)] flex items-center gap-4 shadow-sm">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[var(--gold-dark)] text-xl shadow-sm shrink-0">
+                                <i class="fa-solid fa-spray-can-sparkles"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-gray-500 block font-semibold">Mimos & Beleza</span>
+                                <span class="font-serif text-base font-bold text-[var(--fuchsia-dark)] leading-tight block">Perfumes e Maquiagem</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
             
             modal.classList.add('active');
