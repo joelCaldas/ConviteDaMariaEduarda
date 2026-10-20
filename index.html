@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -17,6 +17,9 @@
             --rose-gold-light: #F8E1E7;
             --fuchsia: #D9027D;
             --fuchsia-dark: #8A004F;
+            --marsala-light: #8A1C31;
+            --marsala-mid: #5C0E1E;
+            --marsala-dark: #3A0510;
             --gold-light: #F9F1CC;
             --gold-mid: #D4AF37;
             --gold-dark: #AA771C;
@@ -69,13 +72,11 @@
         }
         
         .envelope-wrapper { position: relative; width: 320px; height: 200px; transition: transform 1s ease; }
-        
         .envelope-back {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--fuchsia-dark); border-radius: 8px;
             box-shadow: 0 15px 35px rgba(138, 0, 79, 0.3);
         }
-        
         .envelope-front {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             border-left: 160px solid rgba(217, 2, 125, 0.95);
@@ -83,14 +84,12 @@
             border-bottom: 100px solid var(--fuchsia-dark);
             border-top: 100px solid transparent; border-radius: 8px; z-index: 3; pointer-events: none;
         }
-        
         .envelope-flap {
             position: absolute; top: 0; left: 0; width: 0; height: 0;
             border-left: 160px solid transparent; border-right: 160px solid transparent;
             border-top: 120px solid var(--fuchsia);
             transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 4;
         }
-        
         .envelope-letter {
             position: absolute; top: 10px; left: 15px; right: 15px; bottom: 10px;
             background: #fff; border-radius: 5px; z-index: 2;
@@ -101,29 +100,40 @@
 
         .seal {
             position: absolute; top: 120px; left: 50%; transform: translate(-50%, -50%);
-            width: 75px; height: 75px;
-            background: radial-gradient(circle at 35% 35%, #D9027D 0%, #8A004F 45%, #4A002A 100%);
+            width: 80px; height: 80px;
+            background: radial-gradient(circle at 35% 35%, var(--marsala-light) 0%, var(--marsala-mid) 50%, var(--marsala-dark) 100%);
             border-radius: 50%; z-index: 5; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.7), inset 2px 2px 8px rgba(255,255,255,0.4), 0 5px 15px rgba(0,0,0,0.5), 0 0 0 2px #8A004F, 0 0 0 4px rgba(138, 0, 79, 0.8);
-            color: var(--gold-light); font-family: 'Great Vibes', cursive; font-size: 38px;
+            box-shadow: 
+                inset -4px -4px 10px rgba(0,0,0,0.8),
+                inset 3px 3px 10px rgba(255,255,255,0.3),
+                0 8px 20px rgba(0,0,0,0.6),
+                0 0 0 3px var(--marsala-mid),
+                0 0 0 6px rgba(92, 14, 30, 0.6);
+            color: #E2B2B9; 
+            font-family: 'Great Vibes', cursive; font-size: 42px;
             transition: opacity 0.3s, transform 0.3s;
         }
         .seal::before {
-            content: ''; position: absolute; top: 7px; left: 7px; right: 7px; bottom: 7px;
-            border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: inset 1px 1px 5px rgba(0,0,0,0.8), 0px 0px 2px rgba(255,255,255,0.3); pointer-events: none; z-index: 1;
+            content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.7), -1px -1px 2px rgba(255,255,255,0.2); 
+            pointer-events: none; z-index: 1;
         }
         .seal::after {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             border-radius: 50%; animation: pulse-seal 2s infinite; z-index: 0; pointer-events: none;
         }
-        .seal span { position: relative; z-index: 2; text-shadow: -1px -1px 2px rgba(0,0,0,0.8), 1px 1px 1px rgba(255,255,255,0.3); }
+        .seal span { 
+            position: relative; z-index: 2; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9), -1px -1px 1px rgba(255,255,255,0.3);
+            transform: translateY(2px); 
+        }
         .seal:hover { transform: translate(-50%, -50%) scale(1.05); }
 
         @keyframes pulse-seal {
-            0% { box-shadow: 0 0 0 0 rgba(138, 0, 79, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(138, 0, 79, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(138, 0, 79, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(138, 28, 49, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(138, 28, 49, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(138, 28, 49, 0); }
         }
 
         @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.5); } }
@@ -155,8 +165,10 @@
             box-shadow: 0 20px 40px rgba(138, 0, 79, 0.15);
             position: relative;
             overflow: hidden;
-            /* Borda sutil para dar o efeito de vidro */
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .card-border {
@@ -182,26 +194,23 @@
     </style>
 </head>
 <body>
-    <!-- Elemento oculto que carrega a música local -->
+
     <audio id="local-audio-player" loop preload="auto">
         <source src="Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video) - Deparea.m4a" type="audio/mp4">
-        Seu navegador não suporta o elemento de áudio.
     </audio>
 
-    <!-- Botão de controle flutuante -->
     <button class="btn-som" id="muter" onclick="alternarSom()">🔈 Ouvir Música de Fundo</button>
 
-    <!-- Fundo de Imagens - Começa oculto e é revelado pela Lanterna -->
-    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none opacity-0 transition-opacity duration-1000">
-        <img src="Maria eduarda costa vidal-branco.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-100">
-        <img src="Maria eduarda costa vidal-rosa.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-        <!-- Overlay sutil para garantir a leitura perfeita do convite principal sobre a foto -->
-        <div class="absolute inset-0 bg-white/20"></div>
+    <!-- Fundo de Imagens c/ Efeito Lanterna (Spotlight) -->
+    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none" style="opacity: 0; transition: opacity 1s;">
+        <div id="spotlight-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; -webkit-mask-image: radial-gradient(circle 0px at center, black 30%, transparent 100%); mask-image: radial-gradient(circle 0px at center, black 30%, transparent 100%);">
+            <img src="Maria eduarda costa vidal-branco.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-100">
+            <img src="Maria eduarda costa vidal-rosa.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
+            <div class="absolute inset-0 bg-white/10"></div>
+        </div>
     </div>
-
+    
     <div id="envelope-scene" style="overflow: hidden;">
-        
-        <!-- Enfeites: Flores e Brilhos Mágicos -->
         <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0.5s;"></div>
         <div class="sparkle" style="top: 30%; left: 80%; animation-delay: 1.2s;"></div>
         <div class="sparkle" style="top: 70%; left: 15%; animation-delay: 0.2s;"></div>
@@ -211,12 +220,10 @@
 
         <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='%23B76E79' d='M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z'/></svg>" class="floating-flower w-20 h-20 md:w-32 md:h-32" style="top: 10%; left: 5%;">
         <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='%23D9027D' d='M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z'/></svg>" class="floating-flower w-24 h-24 md:w-40 md:h-40" style="bottom: 5%; right: 5%; animation-delay: 1s;">
-        <i class="fa-solid fa-leaf floating-flower text-[var(--rose-gold)] text-3xl md:text-5xl" style="top: 25%; right: 10%; animation-delay: 2s; opacity: 0.2;"></i>
-        <i class="fa-brands fa-pagelines floating-flower text-[var(--fuchsia-dark)] text-4xl md:text-6xl" style="bottom: 15%; left: 10%; animation-delay: 0.5s; opacity: 0.15;"></i>
 
         <div id="intro-text" class="mb-12 text-center z-10 transition-opacity duration-500 ease-out">
-            <h2 class="text-[var(--fuchsia-dark)] font-serif text-sm tracking-[0.3em] uppercase mb-2">15 Anos</h2>
-            <p class="font-light text-[var(--fuchsia)] text-xs animate-pulse">Toque no selo para abrir</p>
+            <h2 class="text-[var(--fuchsia-dark)] font-serif text-sm tracking-[0.3em] uppercase mb-2 text-white/90 drop-shadow-md">15 Anos</h2>
+            <p class="font-light text-[var(--fuchsia)] text-xs animate-pulse bg-white/80 px-4 py-1 rounded-full drop-shadow-sm inline-block">Toque no selo para abrir</p>
         </div>
         
         <div class="envelope-wrapper">
@@ -234,42 +241,36 @@
 
     <div id="main-content" class="flex items-center justify-center py-10 px-4 md:px-0">
         
-        <!-- Cartão com fundo transparente e desfoque (bg-white/50 backdrop-blur-md) -->
-        <div class="card-container bg-white/50 backdrop-blur-md w-full max-w-lg rounded-2xl p-8 md:p-12 text-center relative z-10">
-            <!-- Decorative borders and corners -->
+        <div class="card-container w-full max-w-lg rounded-2xl p-8 md:p-12 text-center relative z-10">
             <div class="card-border"></div>
             <div class="floral-corner top-left"></div>
             <div class="floral-corner bottom-right"></div>
             
-            <!-- Header -->
             <div class="mb-8">
                 <p class="text-xs uppercase tracking-[0.3em] text-[var(--fuchsia)] font-semibold mb-3">Você é meu convidado especial</p>
-                <h1 class="font-script text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-2 drop-shadow-sm">
+                <h1 class="font-script text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-2">
                     Maria Eduarda
                 </h1>
                 <h2 class="font-serif italic text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
             </div>
 
-            <!-- Divider -->
             <div class="flex items-center justify-center gap-4 mb-8">
                 <div class="h-[1px] w-12 bg-gold-gradient"></div>
                 <span class="text-gold text-2xl font-serif">15</span>
                 <div class="h-[1px] w-12 bg-gold-gradient"></div>
             </div>
 
-            <div class="space-y-6 text-gray-800">
-                <!-- Date & Time -->
+            <div class="space-y-6 text-gray-800 font-medium">
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Quando</h3>
-                    <p class="text-xl font-medium">16 de Janeiro de 2027</p>
-                    <p class="text-md font-medium text-[var(--rose-gold)]">às 22 horas</p>
+                    <p class="text-xl">16 de Janeiro de 2027</p>
+                    <p class="text-md text-[var(--rose-gold)]">às 22 horas</p>
                 </div>
 
-                <!-- Location -->
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Onde</h3>
-                    <p class="font-medium text-lg">Chevallier Eventos</p>
-                    <p class="text-sm font-medium mt-1 text-gray-700 leading-relaxed max-w-[250px] mx-auto">
+                    <p class="text-lg">Chevallier Eventos</p>
+                    <p class="text-sm mt-1 text-gray-700 leading-relaxed max-w-[250px] mx-auto">
                         Av. Doca de Sousa Franco,<br>
                         R. 28 de Setembro, N 1160<br>
                         Reduto, Belém - PA<br>
@@ -277,44 +278,37 @@
                     </p>
                 </div>
 
-                <!-- Dress Code Preview -->
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Traje</h3>
-                    <p class="text-md font-medium uppercase tracking-wider text-[var(--rose-gold)]">Esporte Fino</p>
+                    <p class="text-md uppercase tracking-wider text-[var(--rose-gold)]">Esporte Fino</p>
                 </div>
             </div>
 
             <div class="mt-10 space-y-3">
-                <!-- Manual do Convite -->
-                <button onclick="showInfo('manual')" class="btn-action-outline w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                <button onclick="showInfo('manual')" class="btn-action-outline bg-white/70 w-full block py-3 px-6 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     Manual do Convite
                 </button>
 
-                <!-- Código de Vestimenta -->
-                <button onclick="showInfo('traje')" class="btn-action-outline w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                <button onclick="showInfo('traje')" class="btn-action-outline bg-white/70 w-full block py-3 px-6 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     Código de Vestimenta
                 </button>
 
-                <!-- Sugestão de Presentes -->
-                <button onclick="showInfo('presentes')" class="btn-action-outline w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                <button onclick="showInfo('presentes')" class="btn-action-outline bg-white/70 w-full block py-3 px-6 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
                     Sugestão de Presentes
                 </button>
 
-                <!-- Localização (Abre Mapa direto) -->
-                <a href="https://maps.google.com/?q=Chevallier+Eventos+-+Av.+Doca+de+Sousa+Franco,+R.+28+de+Setembro,+N+1160+-+Reduto,+Belém+-+PA,+66053-355" target="_blank" rel="noopener noreferrer" 
-                   class="btn-action w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                <a href="https://maps.google.com/?q=Chevallier+Eventos+-+Av.+Doca+de+Sousa+Franco,+R.+28+de+Setembro,+N+1160+-+Reduto,+Belém+-+PA,+66053-355" target="_blank" rel="noopener noreferrer" class="btn-action w-full block py-3 px-6 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     Localização
                 </a>
 
-                <!-- Confirmação de Presença -->
-                <button onclick="showInfo('rsvp')" class="btn-action w-full block py-3 px-6 rounded-full font-medium tracking-wide flex items-center justify-center gap-2">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFx7215Vu01lZHSKQfe4dnN6hNyCZI6AnV4KkHZHcbc4XLMA/viewform" target="_blank" rel="noopener noreferrer" class="btn-action w-full block py-3 px-6 rounded-full font-bold tracking-wide flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     Confirmação de Presença
-                </button>
+                </a>
             </div>
 
         </div>
@@ -322,32 +316,27 @@
 
     <div id="info-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4">
         <div class="modal-content bg-white w-full max-w-xl rounded-3xl p-8 relative shadow-2xl border-2 border-[var(--rose-gold-light)] max-h-[90vh] overflow-y-auto">
-            <!-- Botão Fechar -->
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-[var(--fuchsia)] transition-colors p-2 z-10">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             
-            <!-- Conteúdo Dinâmico -->
             <h3 id="modal-title" class="font-serif text-2xl text-[var(--fuchsia-dark)] mb-4 text-center border-b border-gray-100 pb-3"></h3>
-            <div id="modal-body" class="text-gray-600 text-center text-sm md:text-base space-y-4 font-light leading-relaxed">
-            </div>
+            <div id="modal-body" class="text-gray-600 text-center text-sm md:text-base space-y-4 font-light leading-relaxed"></div>
         </div>
     </div>
 
     <script>
         function alternarSom() {
-            const botao = document.getElementById('muter');
             const player = document.getElementById('local-audio-player');
+            const botao = document.getElementById('muter');
             
             if (player.paused || player.muted) {
                 player.muted = false;
-                player.volume = 0.5; // Volume agradável para fundo
+                player.volume = 0.5; 
                 player.play().then(() => {
                     botao.innerText = "🔊 Mutar Música";
                     botao.style.backgroundColor = "var(--fuchsia)"; 
-                }).catch(err => {
-                    console.log("O navegador bloqueou o áudio:", err);
-                });
+                }).catch(err => console.log("O navegador bloqueou o áudio:", err));
             } else {
                 player.pause();
                 botao.innerText = "🔈 Ouvir Música de Fundo";
@@ -356,7 +345,6 @@
         }
 
         function openInvite() {
-            // Tenta dar play na música automaticamente ao clicar no selo
             const player = document.getElementById('local-audio-player');
             const botao = document.getElementById('muter');
             
@@ -371,9 +359,8 @@
             const scene = document.getElementById('envelope-scene');
             const wrapper = document.querySelector('.envelope-wrapper');
             const mainContent = document.getElementById('main-content');
-            
-            // Oculta suavemente o texto que dá conflito visual
             const introText = document.getElementById('intro-text');
+            
             if(introText) {
                 introText.style.opacity = '0';
                 introText.style.pointerEvents = 'none';
@@ -385,8 +372,7 @@
                 scene.classList.add('hide-scene');
                 mainContent.classList.add('visible');
                 document.body.style.overflow = 'auto';
-
-                // Ativa a visibilidade do fundo para a lanterna funcionar!
+                
                 document.getElementById('bg-images').style.opacity = '1';
                 targetSpotlightSize = window.innerWidth > 768 ? 400 : 250;
 
@@ -494,15 +480,12 @@
 
                     <div class="mt-4 pt-4 border-t border-gray-100 text-center">
                         <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-3 font-semibold">Inspiração Visual</p>
-                        <img src="exemplo de vestimento.png" alt="Exemplo de Vestimenta" onerror="this.src='https://placehold.co/300x400/F8E1E7/8A004F?text=Exemplo+de+Vestimenta'" class="w-full max-w-[300px] mx-auto h-auto rounded-xl border border-gray-200 shadow-sm object-contain">
+                        <img src="traje-esporteFino.jfif" alt="Exemplo de Vestimenta" onerror="this.src='https://placehold.co/300x400/F8E1E7/8A004F?text=Exemplo+de+Vestimenta'" class="w-full max-w-[300px] mx-auto h-auto rounded-xl border border-gray-200 shadow-sm object-contain">
                     </div>
                 `;
             } else if (type === 'presentes') {
                 modalTitle.innerText = 'Sugestão de Presentes';
                 modalBody.innerHTML = '<p>A sua presença é o meu maior presente! Mas, se desejar me presentear, ficarei muito feliz com qualquer mimo que tocar seu coração, ou através de PIX.</p>';
-            } else if (type === 'rsvp') {
-                modalTitle.innerText = 'Confirmação de Presença';
-                modalBody.innerHTML = '<p>Por favor, confirme sua presença entrando em contato via WhatsApp com os pais da debutante.</p><a href="#" class="inline-block mt-4 text-white bg-[var(--fuchsia)] px-8 py-3 rounded-full font-medium hover:bg-[var(--fuchsia-dark)] transition-all shadow-lg hover:-translate-y-1">Avisar no WhatsApp</a>';
             }
             
             modal.classList.add('active');
@@ -513,7 +496,6 @@
             modal.classList.remove('active');
         }
 
-        // Alternância de Fotos de Fundo
         const bgImages = document.querySelectorAll('.slide-img');
         let currentBg = 0;
         setInterval(() => {
@@ -522,10 +504,10 @@
                 currentBg = (currentBg + 1) % bgImages.length;
                 bgImages[currentBg].style.opacity = '1';
             }
-        }, 4000); // Troca de foto a cada 4 segundos
+        }, 4000);
 
-        // --- EFEITO MÁSCARA/LANTERNA (Substituindo o antigo Canvas de Raspar) ---
-        const bgImagesContainer = document.getElementById('bg-images');
+        // --- Efeito Lanterna / Spotlight ---
+        const spotlightMaskContainer = document.getElementById('spotlight-mask');
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let spotlightSize = 0; 
@@ -544,16 +526,14 @@
         }, {passive: true});
 
         function updateSpotlight() {
-            // Suavização do movimento e expansão da máscara de luz
             spotlightSize += (targetSpotlightSize - spotlightSize) * 0.1;
 
-            if (spotlightSize > 5) {
-                // Cria uma máscara em formato circular focada no cursor que acompanha o movimento
+            if (spotlightSize > 5 && spotlightMaskContainer) {
+                // Sintaxe validada e livre de caracteres escapados que causavam erro
                 const mask = `radial-gradient(circle ${spotlightSize}px at ${mouseX}px ${mouseY}px, black 30%, transparent 100%)`;
-                bgImagesContainer.style.webkitMaskImage = mask;
-                bgImagesContainer.style.maskImage = mask;
+                spotlightMaskContainer.style.webkitMaskImage = mask;
+                spotlightMaskContainer.style.maskImage = mask;
             }
-
             requestAnimationFrame(updateSpotlight);
         }
         updateSpotlight();
