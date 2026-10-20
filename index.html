@@ -184,6 +184,17 @@
             transform-origin: bottom center; /* Faz o cartão desdobrar a partir de baixo */
         }
 
+        @media (max-width: 768px) {
+            .letter-expand .envelope-letter {
+                transform: translateY(-80px) scale(2.8); /* Cresce menos no celular para não bugar a tela */
+            }
+            .seal { transform: translate(-50%, -50%) scale(0.9); }
+        }
+
+        @media (max-width: 380px) {
+            .envelope-wrapper { transform: scale(0.85); } /* Encolhe o envelope em celulares muito estreitos */
+        }
+
         .floral-corner {
             position: absolute; width: 150px; height: 150px; opacity: 0.15; pointer-events: none;
             background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="%23D9027D" d="M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z"/></svg>');
@@ -252,9 +263,9 @@
         <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='%23B76E79' d='M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z'/></svg>" class="floating-flower w-20 h-20 md:w-32 md:h-32" style="top: 10%; left: 5%;">
         <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path fill='%23D9027D' d='M50,0 C60,30 90,40 100,50 C90,60 60,70 50,100 C40,70 10,60 0,50 C10,40 40,30 50,0 Z'/></svg>" class="floating-flower w-24 h-24 md:w-40 md:h-40" style="bottom: 5%; right: 5%; animation-delay: 1s;">
 
-        <div id="intro-text" class="mb-12 text-center z-10 transition-all duration-700 ease-out">
-            <h2 class="font-script text-6xl md:text-7xl text-gold drop-shadow-lg mb-1" style="line-height: 1.2;">15 Anos</h2>
-            <p class="font-serif italic text-[var(--marsala-mid)] text-sm animate-pulse bg-white/70 px-6 py-2 rounded-full shadow-md backdrop-blur-sm inline-block border border-[var(--rose-gold-light)]">✨ Toque no selo para abrir ✨</p>
+        <div id="intro-text" class="mb-12 text-center z-10 transition-all duration-700 ease-out px-4">
+            <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-gold drop-shadow-lg mb-1" style="line-height: 1.2;">15 Anos</h2>
+            <p class="font-serif italic text-[var(--marsala-mid)] text-xs sm:text-sm animate-pulse bg-white/70 px-4 sm:px-6 py-2 rounded-full shadow-md backdrop-blur-sm inline-block border border-[var(--rose-gold-light)]">✨ Toque no selo para abrir ✨</p>
         </div>
         
         <div class="envelope-wrapper">
@@ -270,22 +281,22 @@
         </div>
     </div>
 
-    <div id="main-content" class="flex items-center justify-center py-10 px-4 md:px-0">
+    <div id="main-content" class="flex items-center justify-center py-6 sm:py-10 px-4 md:px-0">
         
-        <div class="card-container w-full max-w-lg rounded-2xl p-8 md:p-12 text-center relative z-10">
+        <div class="card-container w-[95%] sm:w-full max-w-lg rounded-2xl p-6 sm:p-8 md:p-12 text-center relative z-10 mx-auto">
             <div class="card-border"></div>
             <div class="floral-corner top-left"></div>
             <div class="floral-corner bottom-right"></div>
             
-            <div class="mb-8">
-                <p class="text-xs uppercase tracking-[0.3em] text-[var(--fuchsia)] font-semibold mb-3">Você é meu convidado especial</p>
-                <h1 class="font-script text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-2">
+            <div class="mb-6 sm:mb-8">
+                <p class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--fuchsia)] font-semibold mb-3">Você é meu convidado especial</p>
+                <h1 class="font-script text-5xl sm:text-6xl md:text-7xl text-[var(--fuchsia-dark)] leading-tight mb-1 sm:mb-2">
                     Maria Eduarda
                 </h1>
-                <h2 class="font-serif italic text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
+                <h2 class="font-serif italic text-xl sm:text-2xl text-[var(--rose-gold)]">Costa Vidal</h2>
             </div>
 
-            <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <div class="h-[1px] w-12 bg-gold-gradient"></div>
                 <span class="text-gold text-2xl font-serif">15</span>
                 <div class="h-[1px] w-12 bg-gold-gradient"></div>
@@ -301,7 +312,7 @@
                 <div>
                     <h3 class="font-serif text-lg text-[var(--fuchsia-dark)] font-semibold mb-1">Onde</h3>
                     <p class="text-lg">Chevallier Eventos</p>
-                    <p class="text-sm mt-1 text-gray-700 leading-relaxed max-w-[250px] mx-auto">
+                    <p class="text-xs sm:text-sm mt-1 text-gray-700 leading-relaxed max-w-[250px] mx-auto">
                         Av. Doca de Sousa Franco,<br>
                         R. 28 de Setembro, N 1160<br>
                         Reduto, Belém - PA<br>
@@ -477,26 +488,26 @@
                     <div class="text-center mb-6 pt-6 border-t border-gray-100">
                         <p class="text-base text-gray-700 mb-6 font-serif">Para mantermos a harmonia da nossa festa, sugerimos os seguintes tons para o seu look:</p>
                         
-                        <div class="flex flex-wrap justify-center gap-6 mb-8">
-                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
-                                <div class="w-14 h-14 rounded-full bg-black shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Preto</span>
+                        <div class="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8">
+                            <div class="flex flex-col items-center gap-1 sm:gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold text-gray-500">Preto</span>
                             </div>
-                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
-                                <div class="w-14 h-14 rounded-full bg-[#1A2421] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Verde<br>Escuro</span>
+                            <div class="flex flex-col items-center gap-1 sm:gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#1A2421] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold text-gray-500">Verde<br>Escuro</span>
                             </div>
-                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
-                                <div class="w-14 h-14 rounded-full bg-[#E3D3C4] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Nude</span>
+                            <div class="flex flex-col items-center gap-1 sm:gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E3D3C4] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold text-gray-500">Nude</span>
                             </div>
-                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
-                                <div class="w-14 h-14 rounded-full bg-[#1A2A40] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Azul<br>Marinho</span>
+                            <div class="flex flex-col items-center gap-1 sm:gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#1A2A40] shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold text-gray-500">Azul<br>Marinho</span>
                             </div>
-                            <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform">
-                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-gray-500">Prata</span>
+                            <div class="flex flex-col items-center gap-1 sm:gap-2 hover:-translate-y-1 transition-transform">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 shadow-lg border-2 border-white ring-1 ring-gray-200"></div>
+                                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-semibold text-gray-500">Prata</span>
                             </div>
                         </div>
 
