@@ -65,21 +65,21 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--rose-gold-light) 0%, #fff 100%);
             z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            perspective: 1200px; transition: opacity 1s ease-in-out;
+            perspective: 1200px; transition: opacity 0.6s ease-in-out;
         }
 
-        /* Imagem inicial totalmente nítida (sem efeito fosco/blur) */
+        /* Imagem inicial 100% nítida */
         .initial-bg-container {
             position: absolute; inset: 0; z-index: 0; overflow: hidden;
         }
         .initial-bg-img {
             width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
             animation: slowZoom 20s ease-in-out infinite alternate;
-            filter: brightness(1.03) contrast(1.06);
+            filter: brightness(1.04) contrast(1.08);
         }
         .initial-bg-overlay {
             position: absolute; inset: 0;
-            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.0) 35%, rgba(58, 5, 16, 0.35) 100%);
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.0) 40%, rgba(58, 5, 16, 0.3) 100%);
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
         }
@@ -92,7 +92,7 @@
             height: 100%;
             z-index: 15;
             pointer-events: none;
-            transition: opacity 1.2s ease;
+            transition: opacity 0.8s ease;
         }
 
         /* Pétalas da Explosão 2D/3D ao abrir a carta */
@@ -300,36 +300,28 @@
         .letter-expand .envelope-flap {
             transform: translateY(100vh);
             opacity: 0;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s;
         }
         
         .letter-expand .envelope-letter {
             transform: translateY(-90px) scale(3.5);
             opacity: 0;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease 0.6s;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease 0.4s;
         }
 
-        .hide-scene { opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
+        .hide-scene { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
 
         /* Estilo das caixas do Cronômetro */
         .countdown-box-initial {
             background: rgba(58, 5, 16, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(212, 175, 55, 0.5);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
         }
 
         .countdown-box-card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(212, 175, 55, 0.55);
             box-shadow: 0 4px 15px rgba(138, 0, 79, 0.08);
-            transition: background 0.4s ease;
-        }
-        .card-container:hover .countdown-box-card {
-            background: rgba(255, 255, 255, 0.12);
         }
 
         #main-content { 
@@ -341,12 +333,12 @@
         }
 
         @keyframes paperUnfold {
-            0% { opacity: 0; transform: scale(0.7) rotateX(-50deg) translateY(150px); box-shadow: 0 0 0 rgba(0,0,0,0); }
-            100% { opacity: 1; transform: scale(1) rotateX(0deg) translateY(0); box-shadow: 0 20px 40px rgba(138, 0, 79, 0.15); }
+            0% { opacity: 0; transform: scale(0.85) rotateX(-25deg) translateY(80px); }
+            100% { opacity: 1; transform: scale(1) rotateX(0deg) translateY(0); }
         }
 
         #main-content.visible .card-container {
-            animation: paperUnfold 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            animation: paperUnfold 0.9s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
             transform-origin: bottom center;
         }
 
@@ -369,25 +361,16 @@
         .top-left { top: -20px; left: -20px; transform: rotate(-45deg); }
         .bottom-right { bottom: -20px; right: -20px; transform: rotate(135deg); }
 
-        /* Cartão principal ultra transparente para revelar as fotos ao fundo */
+        /* Cartão principal 100% transparente e SEM BLUR desde o início (sem precisar clicar) */
         .card-container {
             box-shadow: 0 15px 35px rgba(138, 0, 79, 0.12);
             position: relative;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border: 1px solid rgba(255, 255, 255, 0.35);
-            transition: background 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease, box-shadow 0.5s ease;
-            text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95), 0 0 4px rgba(255, 255, 255, 0.85);
-        }
-
-        .card-container:hover,
-        .card-container:active {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(0px);
-            -webkit-backdrop-filter: blur(0px);
-            box-shadow: 0 20px 50px rgba(138, 0, 79, 0.2);
+            text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95), 0 0 4px rgba(255, 255, 255, 0.9);
         }
 
         .card-border {
@@ -397,7 +380,7 @@
 
         .btn-action { background: var(--fuchsia); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(217, 2, 125, 0.3); text-shadow: none; }
         .btn-action:hover { background: var(--fuchsia-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217, 2, 125, 0.5); }
-        .btn-action-outline { background: rgba(255,255,255,0.75); color: var(--fuchsia); border: 1px solid var(--fuchsia); transition: all 0.3s ease; text-shadow: none; }
+        .btn-action-outline { background: rgba(255,255,255,0.78); color: var(--fuchsia); border: 1px solid var(--fuchsia); transition: all 0.3s ease; text-shadow: none; }
         .btn-action-outline:hover { background: var(--rose-gold-light); }
 
         .modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease-out; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
@@ -410,6 +393,12 @@
             font-size: 12px; z-index: 90; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
         }
         .btn-som:hover { transform: translateY(-2px); }
+
+        /* Imagens de fundo mais vivas e nítidas */
+        .slide-img {
+            filter: brightness(1.03) contrast(1.06);
+            will-change: opacity;
+        }
     </style>
 </head>
 <body>
@@ -423,7 +412,6 @@
     <!-- Definições SVG globais para as Rosas 3D e 2D -->
     <svg class="hidden" width="0" height="0">
         <defs>
-            <!-- Gradientes 3D para Rosas -->
             <radialGradient id="rose-3d-fuchsia" cx="35%" cy="30%" r="70%">
                 <stop offset="0%" stop-color="#FF85C0" />
                 <stop offset="40%" stop-color="#D9027D" />
@@ -445,7 +433,6 @@
                 <feDropShadow dx="4" dy="8" stdDeviation="5" flood-color="#1a000d" flood-opacity="0.55"/>
             </filter>
 
-            <!-- Símbolo da Rosa 3D Realista em Camadas -->
             <g id="rose-3d-symbol" filter="url(#drop-3d)">
                 <path d="M50,50 Q15,20 5,45 Q20,65 50,50 Z" fill="url(#gold-leaf-grad)" opacity="0.9" />
                 <path d="M50,50 Q85,15 95,40 Q80,65 50,50 Z" fill="url(#gold-leaf-grad)" opacity="0.85" />
@@ -459,7 +446,6 @@
                 <path d="M45,44 C45,39 51,37 55,41 C58,45 55,51 50,52 C46,52 45,48 45,44 Z" fill="#FFF0F5" opacity="0.85" />
             </g>
 
-            <!-- Símbolo da Flor 2D Vetorial Delicada -->
             <g id="flower-2d-symbol">
                 <path d="M50,5 C62,32 68,38 95,50 C68,62 62,68 50,95 C38,68 32,62 5,50 C32,38 38,32 50,5 Z" fill="none" stroke="#F9F1CC" stroke-width="1.5" opacity="0.7" />
                 <path d="M20,20 C42,35 58,35 80,20 C65,42 65,58 80,80 C58,65 42,65 20,80 C35,58 35,42 20,20 Z" fill="#F8E1E7" opacity="0.45" />
@@ -469,22 +455,21 @@
         </defs>
     </svg>
 
-    <!-- Fundo de Imagens c/ Efeito Lanterna (Spotlight) e mais fotos trocando no fundo -->
-    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none" style="opacity: 0; transition: opacity 1s;">
-        <div id="spotlight-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; -webkit-mask-image: radial-gradient(circle 0px at center, black 35%, transparent 100%); mask-image: radial-gradient(circle 0px at center, black 35%, transparent 100%);">
-            <img src="inicil de pagina.jfif" onerror="this.src='inicil de pagina_2.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-100">
-            <img src="Maria eduarda costa vidal-branco.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="Maria eduarda costa vidal-rosa.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.01.57.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.01.58 (1).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.01.58.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.02.00 (1).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.02.00 (2).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.02.00.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.02.01 (1).jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.02.01.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <img src="WhatsApp Image 2026-10-17 at 16.00.51.jpeg" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 slide-img opacity-0">
-            <div class="absolute inset-0 bg-white/5"></div>
+    <!-- Fundo de Imagens Nítido (sem película esbranquiçada e com resposta imediata) -->
+    <div id="bg-images" class="fixed inset-0 z-0 pointer-events-none" style="opacity: 0; transition: opacity 0.35s ease-out;">
+        <div id="spotlight-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; -webkit-mask-image: radial-gradient(circle 480px at center, black 55%, transparent 100%); mask-image: radial-gradient(circle 480px at center, black 55%, transparent 100%);">
+            <img src="inicil de pagina.jfif" loading="eager" onerror="this.src='inicil de pagina_2.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-100">
+            <img src="Maria eduarda costa vidal-branco.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="Maria eduarda costa vidal-rosa.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.01.57.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.01.58 (1).jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.01.58.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.00 (1).jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.00 (2).jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.00.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.01 (1).jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.02.01.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
+            <img src="WhatsApp Image 2026-10-17 at 16.00.51.jpeg" loading="eager" onerror="this.src='inicil de pagina.jfif'" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 slide-img opacity-0">
         </div>
     </div>
 
@@ -540,7 +525,7 @@
             <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-gold font-semibold mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">Maria Eduarda</p>
             <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-gold drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] mb-3" style="line-height: 1.1;">Meus 15 Anos</h2>
             
-            <div class="bg-[#3A0510]/65 backdrop-blur-sm border border-[var(--gold-mid)]/60 rounded-2xl p-3.5 sm:p-4 mb-3.5 shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
+            <div class="bg-[#3A0510]/65 border border-[var(--gold-mid)]/60 rounded-2xl p-3.5 sm:p-4 mb-3.5 shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
                 <p class="font-serif italic text-xs sm:text-sm md:text-base text-gold leading-snug drop-shadow">
                     “O Senhor fez grandes coisas por nós, e por isso estamos alegres”
                 </p>
@@ -624,8 +609,8 @@
                 <h2 class="font-serif italic text-xl sm:text-2xl text-[var(--rose-gold)] font-semibold">Costa Vidal</h2>
             </div>
 
-            <!-- 2ª Parte: Apenas a Frase em Dourado no Cartão Principal -->
-            <div class="bg-[#3A0510]/55 hover:bg-[#3A0510]/35 transition-colors duration-500 backdrop-blur-sm rounded-2xl p-4 mb-6 shadow-md border border-[var(--gold-mid)]">
+            <!-- 2ª Parte: Apenas a Frase em Dourado no Cartão Principal (Sem Blur) -->
+            <div class="bg-[#3A0510]/55 rounded-2xl p-4 mb-6 shadow-md border border-[var(--gold-mid)]">
                 <p class="font-serif italic text-xs sm:text-sm text-gold leading-relaxed">
                     “O valor das coisas não está no tempo que elas duram, mas na intensidade com que elas acontecem.”
                 </p>
@@ -723,6 +708,14 @@
     </div>
 
     <script>
+        // Pré-carrega todas as imagens de fundo na memória assim que a página abre
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.slide-img').forEach(img => {
+                const preloader = new Image();
+                preloader.src = img.src;
+            });
+        });
+
         function alternarSom() {
             const player = document.getElementById('local-audio-player');
             const botao = document.getElementById('muter');
@@ -948,7 +941,7 @@
             }
         }
 
-        // --- Abertura do Envelope com Quebra do Selo ---
+        // --- Abertura do Envelope com Nitidez Imediata ---
         let isInviteOpening = false;
         function openInvite(event) {
             if (isInviteOpening) return;
@@ -978,7 +971,16 @@
             const mainContent = document.getElementById('main-content');
             const introText = document.getElementById('intro-text');
             const initialCountdown = document.getElementById('initial-countdown');
+            const bgImagesContainer = document.getElementById('bg-images');
             
+            // Prepara o tamanho da lanterna imediatamente no tamanho máximo para não demorar a abrir
+            const fullRadius = window.innerWidth > 768 ? 500 : 340;
+            spotlightSize = fullRadius;
+            targetSpotlightSize = fullRadius;
+            if (bgImagesContainer) {
+                bgImagesContainer.style.opacity = '1';
+            }
+
             if(introText) {
                 introText.style.opacity = '0';
                 introText.style.transform = 'translateY(-20px)';
@@ -993,26 +995,23 @@
             
             setTimeout(() => {
                 wrapper.classList.add('is-open');
-            }, 300);
+            }, 250);
 
             setTimeout(() => {
                 triggerEnvelopePetalExplosion();
-            }, 520);
+            }, 450);
             
             setTimeout(() => {
                 wrapper.classList.add('letter-expand');
                 if (typeof window.trigger3DPetalExplosion === 'function') {
                     window.trigger3DPetalExplosion();
                 }
-            }, 1450);
+            }, 1150);
             
             setTimeout(() => {
                 scene.classList.add('hide-scene');
                 mainContent.classList.add('visible');
                 document.body.style.overflow = 'auto';
-                
-                document.getElementById('bg-images').style.opacity = '1';
-                targetSpotlightSize = window.innerWidth > 768 ? 420 : 270;
 
                 const canvas3d = document.getElementById('roses-3d-canvas');
                 if (canvas3d) {
@@ -1022,8 +1021,8 @@
 
                 setTimeout(() => {
                     scene.style.display = 'none';
-                }, 1000);
-            }, 2250); 
+                }, 550);
+            }, 1650); 
         }
 
         // --- Modais Informativos ---
@@ -1068,7 +1067,7 @@
                                 </h5>
                                 <ul class="list-disc list-inside text-xs sm:text-sm text-gray-700 space-y-1.5 pl-2">
                                     <li>Mova o cursor do mouse (ou deslize o dedo na tela do celular) para acionar o efeito lanterna (<em>spotlight</em>) e revelar as fotos da Maria Eduarda que alternam no fundo.</li>
-                                    <li>Ao passar o cursor ou manter o toque sobre a carta principal, o painel fica ainda mais translúcido para destacar o ensaio fotográfico.</li>
+                                    <li>O cartão central é totalmente cristalino para destacar o ensaio fotográfico com nitidez.</li>
                                 </ul>
                             </div>
                         </div>
@@ -1350,8 +1349,8 @@
         const parallaxItems = document.querySelectorAll('.parallax-item');
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
-        let spotlightSize = 0; 
-        let targetSpotlightSize = 0;
+        let spotlightSize = window.innerWidth > 768 ? 500 : 340; 
+        let targetSpotlightSize = window.innerWidth > 768 ? 500 : 340;
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -1376,10 +1375,10 @@
         }, {passive: true});
 
         function updateSpotlight() {
-            spotlightSize += (targetSpotlightSize - spotlightSize) * 0.1;
+            spotlightSize += (targetSpotlightSize - spotlightSize) * 0.2;
 
-            if (spotlightSize > 5 && spotlightMaskContainer) {
-                const mask = `radial-gradient(circle ${spotlightSize}px at ${mouseX}px ${mouseY}px, black 35%, transparent 100%)`;
+            if (spotlightMaskContainer) {
+                const mask = `radial-gradient(circle ${spotlightSize}px at ${mouseX}px ${mouseY}px, black 55%, transparent 100%)`;
                 spotlightMaskContainer.style.webkitMaskImage = mask;
                 spotlightMaskContainer.style.maskImage = mask;
             }
