@@ -1335,6 +1335,17 @@
                             <div class="bg-white p-3 rounded-2xl shadow-md border border-[var(--rose-gold-light)] inline-block mx-auto">
                                 <img src="qrcode-pix.png" alt="QR Code Chave PIX" class="w-44 h-44 sm:w-48 sm:h-48 object-contain mx-auto rounded-lg">
                             </div>
+
+                            <div class="mt-4 text-center">
+                                
+                            <button onclick="copiarChavePix()" class="btn-action w-full py-3 px-6 rounded-full font-bold tracking-wide flex items-center justify-center gap-2 shadow-md">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                </svg>
+                                <span>Copiar Chave Pix (Celular)</span>
+                            </button>
+                            <p id="pix-feedback" class="text-xs text-[var(--fuchsia-dark)] font-medium mt-2 h-4"></p>
+                        </div>
                         </div>
                     </div>
                 `;
@@ -1347,6 +1358,40 @@
             const modal = document.getElementById('info-modal');
             modal.classList.remove('active');
         }
+
+       function copiarChavePix() {
+    const chavePix = "65980107215";
+    
+    // Copia a chave para a área de transferência
+    navigator.clipboard.writeText(chavePix).then(() => {
+        const feedback = document.getElementById('pix-feedback');
+        if (feedback) {
+            feedback.innerText = "✨ Chave Pix copiada com sucesso! Cole no aplicativo do seu banco.";
+            setTimeout(() => {
+                feedback.innerText = "";
+            }, 4000);
+        }
+
+        // --- Adiciona a voz falando a mensagem ---
+        if ('speechSynthesis' in window) {
+            // Cancela qualquer fala anterior para não sobrepor
+            window.speechSynthesis.cancel();
+
+            const textoFalado = "Chave Pix copiada com sucesso. Cole no aplicativo do seu banco.";
+            const utterance = new SpeechSynthesisUtterance(textoFalado);
+            
+            // Configurações da voz (idioma Português do Brasil)
+            utterance.lang = 'pt-BR';
+            utterance.rate = 1.05; // Velocidade ligeiramente natural
+            utterance.pitch = 1.0; // Tom de voz normal
+            
+            window.speechSynthesis.speak(utterance);
+        }
+    }).catch(err => {
+        console.error("Erro ao copiar chave pix: ", err);
+        alert("Chave Pix: 65980107215");
+    });
+}
 
         // --- Carrossel de Imagens de Fundo ---
         const bgImages = document.querySelectorAll('.slide-img');
