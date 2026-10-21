@@ -361,7 +361,7 @@
         .top-left { top: -20px; left: -20px; transform: rotate(-45deg); }
         .bottom-right { bottom: -20px; right: -20px; transform: rotate(135deg); }
 
-        /* Cartão principal 100% transparente e SEM BLUR desde o início (sem precisar clicar) */
+        /* Cartão principal 100% transparente e SEM BLUR desde o início */
         .card-container {
             box-shadow: 0 15px 35px rgba(138, 0, 79, 0.12);
             position: relative;
@@ -404,7 +404,7 @@
 <body>
 
     <audio id="local-audio-player" loop preload="auto">
-        <source src="CeCe Winans - Goodness of God - Instrumental Cover with Lyrics - Tanner Tracks Premiere.m4a" type="audio/mp4">
+        <source src="Goodness Of God - Cece Winans ( tradução em português) - Perseguindo O Propósito.m4a" type="audio/mp4">
     </audio>
 
     <button class="btn-som" id="muter" onclick="alternarSom()">🔈 Ouvir Música de Fundo</button>
@@ -973,7 +973,6 @@
             const initialCountdown = document.getElementById('initial-countdown');
             const bgImagesContainer = document.getElementById('bg-images');
             
-            // Prepara o tamanho da lanterna imediatamente no tamanho máximo para não demorar a abrir
             const fullRadius = window.innerWidth > 768 ? 500 : 340;
             spotlightSize = fullRadius;
             targetSpotlightSize = fullRadius;
@@ -1101,7 +1100,7 @@
                                 <h5 class="font-serif font-bold text-[var(--fuchsia-dark)] text-sm flex items-center gap-2">
                                     <i class="fa-solid fa-gift text-[var(--fuchsia)]"></i> Sugestão de Presentes:
                                 </h5>
-                                <p class="text-xs sm:text-sm text-gray-700"><strong>O que faz:</strong> Abre a tela com as preferências e medidas da aniversariante.</p>
+                                <p class="text-xs sm:text-sm text-gray-700"><strong>O que faz:</strong> Abre a tela com as preferências, medidas da aniversariante e QR Code PIX.</p>
                                 <div class="text-xs text-gray-700 space-y-1 pl-2 pt-1">
                                     <p class="font-semibold text-[var(--marsala-light)]">Informações exibidas:</p>
                                     <ul class="list-disc list-inside space-y-1">
@@ -1109,6 +1108,7 @@
                                         <li><strong>Vestimenta:</strong> Nº 42.</li>
                                         <li><strong>Tamanho:</strong> M.</li>
                                         <li><strong>Preferências:</strong> Perfumes e Maquiagem.</li>
+                                        <li><strong>QR Code PIX:</strong> Para quem desejar presentear via PIX.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1319,6 +1319,21 @@
                             <div>
                                 <span class="text-[10px] uppercase tracking-widest text-gray-500 block font-semibold">Mimos & Beleza</span>
                                 <span class="font-serif text-base font-bold text-[var(--fuchsia-dark)] leading-tight block">Perfumes e Maquiagem</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção QR Code Chave PIX -->
+                    <div class="mt-6 pt-6 border-t border-gray-200 text-center">
+                        <div class="bg-gradient-to-b from-[#F8E1E7]/60 to-white p-5 rounded-2xl border border-[var(--gold-mid)] shadow-sm">
+                            <h4 class="font-serif text-lg text-[var(--fuchsia-dark)] font-bold mb-1 flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-pix text-[var(--fuchsia)]"></i> Presentear via PIX
+                            </h4>
+                            <p class="text-xs text-gray-600 mb-4">
+                                Caso prefira, aponte a câmera do seu celular para o QR Code abaixo:
+                            </p>
+                            <div class="bg-white p-3 rounded-2xl shadow-md border border-[var(--rose-gold-light)] inline-block mx-auto">
+                                <img src="qrcode-pix.png" alt="QR Code Chave PIX" class="w-44 h-44 sm:w-48 sm:h-48 object-contain mx-auto rounded-lg">
                             </div>
                         </div>
                     </div>
